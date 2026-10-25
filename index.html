@@ -311,10 +311,13 @@ footer { padding-block: 32px 48px; font-size: 12px; color: var(--dim); }
 
 @media (min-width: 901px) {
 [data-m="ph:p1"] { transform: translate(852px, 12px); width: 186px; max-width: none; flex-basis: 186px; --w: 186px; } [data-m="ph:p1"]:is(span, a, b) { display: inline-block; }
+[data-m="box:notesWhy"] { transform: translate(0px, -2px); } [data-m="box:notesWhy"]:is(span, a, b) { display: inline-block; }
 }
 </style><style>
 /* 뺀 것 (편집 모드 [✕ 빼기]) */
-html:not(.ed-mode) :is([data-k="profile.facts"]) { display: none !important; }
+html:not(.ed-mode) :is([data-k="profile.facts"], [data-k="labels.notesHead"], [data-k="notes.note"], [data-m="box:notesWhy"], [data-k="labels.notes"], [data-k="labels.notesWhy"], [data-k="notes.why.0"], [data-k="labels.noteShotsTab"], [data-k="labels.programs"], [data-k="labels.programsNote"], [data-m="box:programsList"], [data-m="box:programsText"], [data-m="gal:programs"], [data-m="gal:n"]) { display: none !important; }
+/* 안이 다 빈 구역 · 줄은 선까지 숨김 (2026-10-25) */
+.pf-void { display: none !important; }
 @media (max-width: 520px) {
   .wrap { padding-inline: 16px; }
   .vrow { grid-template-columns: 96px minmax(0, 1fr); } .vrow img { width: 96px; height: 54px; }
@@ -405,30 +408,30 @@ html:not(.ed-mode) :is([data-k="profile.facts"]) { display: none !important; }
         <span class="vrow-t">The Last of Us Part II</span>
         <span class="vrow-m">Trailer (gameplay edit) · Sound Redesign · 2:26</span>
       </button></li>
-      <li data-id="kYxwDrfYFCw"><button type="button" class="vrow" data-i="1" aria-label="ArcheAge War 재생">
-        <img src="img/사진넣기_영상_kYxwDrfYFCw.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_kYxwDrfYFCw">
-        <span class="vrow-t">ArcheAge War</span>
-        <span class="vrow-m">Trailer · Sound Redesign · 1:38</span>
-      </button></li>
-      <li data-id="rc-eExao-ls"><button type="button" class="vrow" data-i="2" aria-label="LORDNINE 재생">
-        <img src="img/사진넣기_영상_rc-eExao-ls.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_rc-eExao-ls">
-        <span class="vrow-t">LORDNINE</span>
-        <span class="vrow-m">Trailer · Sound Redesign · 1:17</span>
-      </button></li>
-      <li data-id="4crZ2vKl_8o"><button type="button" class="vrow" data-i="3" aria-label="Dungeon &amp; Fighter: Overkill 재생">
-        <img src="img/사진넣기_영상_4crZ2vKl_8o.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_4crZ2vKl_8o">
-        <span class="vrow-t">Dungeon &amp; Fighter: Overkill</span>
-        <span class="vrow-m">Trailer · Sound Redesign · 1:08</span>
-      </button></li>
-      <li data-id="wBZLKIVBC8w"><button type="button" class="vrow" data-i="4" aria-label="Back 4 Blood 재생">
+      <li data-id="wBZLKIVBC8w"><button type="button" class="vrow" data-i="1" aria-label="Back 4 Blood 재생">
         <img src="img/사진넣기_영상_wBZLKIVBC8w.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_wBZLKIVBC8w">
         <span class="vrow-t">Back 4 Blood</span>
         <span class="vrow-m">Trailer · Sound Redesign · 1:47</span>
       </button></li>
-      <li data-id="06eVmlKTqvA"><button type="button" class="vrow" data-i="5" aria-label="Dungeons &amp; Dragons 재생">
+      <li data-id="kYxwDrfYFCw"><button type="button" class="vrow" data-i="2" aria-label="ArcheAge War 재생">
+        <img src="img/사진넣기_영상_kYxwDrfYFCw.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_kYxwDrfYFCw">
+        <span class="vrow-t">ArcheAge War</span>
+        <span class="vrow-m">Trailer · Sound Redesign · 1:38</span>
+      </button></li>
+      <li data-id="rc-eExao-ls"><button type="button" class="vrow" data-i="3" aria-label="LORDNINE 재생">
+        <img src="img/사진넣기_영상_rc-eExao-ls.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_rc-eExao-ls">
+        <span class="vrow-t">LORDNINE</span>
+        <span class="vrow-m">Trailer · Sound Redesign · 1:17</span>
+      </button></li>
+      <li data-id="06eVmlKTqvA"><button type="button" class="vrow" data-i="4" aria-label="Dungeons &amp; Dragons 재생">
         <img src="img/사진넣기_영상_06eVmlKTqvA.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_06eVmlKTqvA">
         <span class="vrow-t">Dungeons &amp; Dragons</span>
         <span class="vrow-m">Cinematic trailer · Sound Redesign · 1:45</span>
+      </button></li>
+      <li data-id="4crZ2vKl_8o"><button type="button" class="vrow" data-i="5" aria-label="Dungeon &amp; Fighter: Overkill 재생">
+        <img src="img/사진넣기_영상_4crZ2vKl_8o.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_4crZ2vKl_8o">
+        <span class="vrow-t">Dungeon &amp; Fighter: Overkill</span>
+        <span class="vrow-m">Trailer · Sound Redesign · 1:08</span>
       </button></li>
       </ol>
     </div>
@@ -602,7 +605,7 @@ html:not(.ed-mode) :is([data-k="profile.facts"]) { display: none !important; }
 <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.8/dist/hls.min.js"></script>
 <script>
 (function () {
-  var VIDS = [{"id":"qJQO0FiphRs","si":0,"title":"The Last of Us Part II","kind":"Trailer (gameplay edit) · Sound Redesign","meta":[["Developer · Publisher","Naughty Dog · Sony Interactive Entertainment"],["Genre","Action adventure · Survival horror"],["My role","Voice directing (Ellie), Foley recording, sound design, mix & master"],["DAW","Cubase 13"]],"points":["Voice: I cast and directed a voice actor for Ellie myself. I set the brief (around 17 to 19, mid-range voice, anger mixed with tension) and wrote direction for every moment, from pulling out an arrow to whispered lines while sneaking.","Foley: I recorded my own Foley with a PCM-A10 and built the SFX from it. A paper-wrapped wooden chopstick twisted for bowstring tension, coins in a bag for steps on grass. The UI also comes from real objects: a light bulb, cloth, a can.","Scripted vs. gameplay: in scripted moments, like pulling out the arrow or a short line, the voice and sound follow the edit like a cutscene with clear emotional peaks. In gameplay moments, sound works like the game itself: Ellie's breathing changes with enemy distance (none beyond 5 m, light at 2 to 3 m, rough within 1 m), so danger reads without any HUD.","Ambience: a danso's wind, a balloon losing air and guitar string scratches, under the reverb of the building, so the tension never fully resolves."],"links":[["Sound design document · Voice direction","#plan-tlou2"]],"chapters":[[0,"0:00","Stealth · watching enemies inside the store","0:27"],[43,"0:43","Stealth kill · close Foley","0:50"],[65,"1:05","Crafting screen · UI sound","1:09"],[72,"1:12","Spotted · melee fight","1:27"],[102,"1:42","Bow and melee attacks","1:57"],[118,"1:58","Final kill · Ellie's lines","2:16"]],"hls":"media/qJQO0FiphRs/hls/index.txt","fallback":"media/qJQO0FiphRs/fallback.mp4","poster":"img/사진넣기_영상_qJQO0FiphRs.jpg","duration":146,"height":1080},{"id":"kYxwDrfYFCw","si":1,"title":"ArcheAge War","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","XLGAMES · Kakao Games"],["Engine","Unreal Engine 4"],["Platform","PC & mobile"],["My role","Sound design, mix & master"],["DAW","Cubase 12"]],"points":["Epic style: I built the trailer on the traits of epic game sound. Bright, high-pitched sounds add fun, while the low end makes every scene feel grander.","Big moments: the wall explosion and the bridge explosion carry the climax, and the logo sound closes the trailer before a short post-credit scene."],"links":[],"chapters":[[0,"0:00","Intro","0:15"],[15,"0:15","Battlefield (castle view)","0:21"],[21,"0:21","Battlefield (outskirts)","0:30"],[30,"0:30","The battle begins","0:36"],[36,"0:36","Paladin fight","0:40"],[40,"0:40","Mage fight","0:47"],[47,"0:47","Hero scene","0:58"],[58,"0:58","Wall explosion","1:03"],[63,"1:03","Hero scene","1:10"],[70,"1:10","Bridge explosion & climax","1:25"],[85,"1:25","Logo sound","1:29"],[89,"1:29","Post-credit scene","1:38"]],"hls":"media/kYxwDrfYFCw/hls/index.txt","fallback":"media/kYxwDrfYFCw/fallback.mp4","poster":"img/사진넣기_영상_kYxwDrfYFCw.jpg","duration":98,"height":1080},{"id":"rc-eExao-ls","si":2,"title":"LORDNINE","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","NX3 Games · Smilegate"],["Genre","MMORPG"],["Engine","Unity"],["My role","Sound design, mix & master"],["DAW","Cubase 13"]],"points":["Build-up: risers carry the tension through the rising part of the trailer and make the viewer expect the next shot.","Scale: for the army gathering, I used sub-bass sources and Scheps 73 to give the low end more weight and resonance, so the crowd feels heavy rather than just loud."],"links":[],"chapters":[],"hls":"media/rc-eExao-ls/hls/index.txt","fallback":"media/rc-eExao-ls/fallback.mp4","poster":"img/사진넣기_영상_rc-eExao-ls.jpg","duration":77,"height":1080},{"id":"4crZ2vKl_8o","si":3,"title":"Dungeon & Fighter: Overkill","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","Neople · Nexon"],["Engine","Unreal Engine 4"],["Genre","Action"],["Platform","PC · Android · iOS"],["My role","Sound design, mix & master"],["DAW","Cubase 13"]],"points":["Impact: the crisp, satisfying hit feel the original Dungeon & Fighter is known for was the main focus of the sound.","Character gear: mid-range sounds lead, to bring out the character of each piece of equipment.","Weight: low impacts make the frame feel grand and keep the sound solid on speakers, which makes each scene more fun."],"links":[],"chapters":[],"hls":"media/4crZ2vKl_8o/hls/index.txt","fallback":"media/4crZ2vKl_8o/fallback.mp4","poster":"img/사진넣기_영상_4crZ2vKl_8o.jpg","duration":68,"height":1080},{"id":"wBZLKIVBC8w","si":4,"title":"Back 4 Blood","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","Turtle Rock Studios · Warner Bros. Games"],["Engine","Unreal Engine 4"],["Platform","PC · PS5 · Xbox"],["My role","Voice directing (special zombies), sound design, mix & master"],["DAW","Cubase 13"]],"points":["Voice: I directed the voices of the special zombies myself so each one shows its own character.","Realism: guns, hits and Foley were made to sound grounded, and panned to sit in space like real recordings.","Tension: a low-end bed runs under the trailer so the tension holds while the viewer watches."],"links":[],"chapters":[],"hls":"media/wBZLKIVBC8w/hls/index.txt","fallback":"media/wBZLKIVBC8w/fallback.mp4","poster":"img/사진넣기_영상_wBZLKIVBC8w.jpg","duration":107,"height":1080},{"id":"06eVmlKTqvA","si":5,"title":"Dungeons & Dragons","kind":"Cinematic trailer · Sound Redesign","meta":[["Video","Unofficial cinematic"],["Genre","Fantasy action"],["My role","Sound design, character voice editing, mix & master"],["DAW","Cubase 13"]],"points":["Dragon: the dragon's fury is carried by mid and low frequencies to keep the battle tense, with comic moments placed in between to make it fun.","Voices: I searched library sources that suit each character and placed voices that fit each situation.","Foley: for the grand 3D visuals I paid close attention to Foley, and used panning so the sound feels more real."],"links":[],"chapters":[],"hls":"media/06eVmlKTqvA/hls/index.txt","fallback":"media/06eVmlKTqvA/fallback.mp4","poster":"img/사진넣기_영상_06eVmlKTqvA.jpg","duration":105,"height":1080}];
+  var VIDS = [{"id":"qJQO0FiphRs","si":0,"title":"The Last of Us Part II","kind":"Trailer (gameplay edit) · Sound Redesign","meta":[["Developer · Publisher","Naughty Dog · Sony Interactive Entertainment"],["Genre","Action adventure · Survival horror"],["My role","Voice directing (Ellie), Foley recording, sound design, mix & master"],["DAW","Cubase 13"]],"points":["Voice: I cast and directed a voice actor for Ellie myself. I set the brief (around 17 to 19, mid-range voice, anger mixed with tension) and wrote direction for every moment, from pulling out an arrow to whispered lines while sneaking.","Foley: I recorded my own Foley with a PCM-A10 and built the SFX from it. A paper-wrapped wooden chopstick twisted for bowstring tension, coins in a bag for steps on grass. The UI also comes from real objects: a light bulb, cloth, a can.","Scripted vs. gameplay: in scripted moments, like pulling out the arrow or a short line, the voice and sound follow the edit like a cutscene with clear emotional peaks. In gameplay moments, sound works like the game itself: Ellie's breathing changes with enemy distance (none beyond 5 m, light at 2 to 3 m, rough within 1 m), so danger reads without any HUD.","Ambience: a danso's wind, a balloon losing air and guitar string scratches, under the reverb of the building, so the tension never fully resolves."],"links":[["Sound design document · Voice direction","#plan-tlou2"]],"chapters":[[0,"0:00","Stealth · watching enemies inside the store","0:27"],[43,"0:43","Stealth kill · close Foley","0:50"],[65,"1:05","Crafting screen · UI sound","1:09"],[72,"1:12","Spotted · melee fight","1:27"],[102,"1:42","Bow and melee attacks","1:57"],[118,"1:58","Final kill · Ellie's lines","2:16"]],"hls":"media/qJQO0FiphRs/hls/index.txt","fallback":"media/qJQO0FiphRs/fallback.mp4","poster":"img/사진넣기_영상_qJQO0FiphRs.jpg","duration":146,"height":1080},{"id":"wBZLKIVBC8w","si":1,"title":"Back 4 Blood","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","Turtle Rock Studios · Warner Bros. Games"],["Engine","Unreal Engine 4"],["Platform","PC · PS5 · Xbox"],["My role","Voice directing (special zombies), sound design, mix & master"],["DAW","Cubase 13"]],"points":["Voice: I directed the voices of the special zombies myself so each one shows its own character.","Realism: guns, hits and Foley were made to sound grounded, and panned to sit in space like real recordings.","Tension: a low-end bed runs under the trailer so the tension holds while the viewer watches."],"links":[],"chapters":[],"hls":"media/wBZLKIVBC8w/hls/index.txt","fallback":"media/wBZLKIVBC8w/fallback.mp4","poster":"img/사진넣기_영상_wBZLKIVBC8w.jpg","duration":107,"height":1080},{"id":"kYxwDrfYFCw","si":2,"title":"ArcheAge War","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","XLGAMES · Kakao Games"],["Engine","Unreal Engine 4"],["Platform","PC & mobile"],["My role","Sound design, mix & master"],["DAW","Cubase 12"]],"points":["Epic style: I built the trailer on the traits of epic game sound. Bright, high-pitched sounds add fun, while the low end makes every scene feel grander.","Big moments: the wall explosion and the bridge explosion carry the climax, and the logo sound closes the trailer before a short post-credit scene."],"links":[],"chapters":[[0,"0:00","Intro","0:15"],[15,"0:15","Battlefield (castle view)","0:21"],[21,"0:21","Battlefield (outskirts)","0:30"],[30,"0:30","The battle begins","0:36"],[36,"0:36","Paladin fight","0:40"],[40,"0:40","Mage fight","0:47"],[47,"0:47","Hero scene","0:58"],[58,"0:58","Wall explosion","1:03"],[63,"1:03","Hero scene","1:10"],[70,"1:10","Bridge explosion & climax","1:25"],[85,"1:25","Logo sound","1:29"],[89,"1:29","Post-credit scene","1:38"]],"hls":"media/kYxwDrfYFCw/hls/index.txt","fallback":"media/kYxwDrfYFCw/fallback.mp4","poster":"img/사진넣기_영상_kYxwDrfYFCw.jpg","duration":98,"height":1080},{"id":"rc-eExao-ls","si":3,"title":"LORDNINE","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","NX3 Games · Smilegate"],["Genre","MMORPG"],["Engine","Unity"],["My role","Sound design, mix & master"],["DAW","Cubase 13"]],"points":["Build-up: risers carry the tension through the rising part of the trailer and make the viewer expect the next shot.","Scale: for the army gathering, I used sub-bass sources and Scheps 73 to give the low end more weight and resonance, so the crowd feels heavy rather than just loud."],"links":[],"chapters":[],"hls":"media/rc-eExao-ls/hls/index.txt","fallback":"media/rc-eExao-ls/fallback.mp4","poster":"img/사진넣기_영상_rc-eExao-ls.jpg","duration":77,"height":1080},{"id":"06eVmlKTqvA","si":4,"title":"Dungeons & Dragons","kind":"Cinematic trailer · Sound Redesign","meta":[["Video","Unofficial cinematic"],["Genre","Fantasy action"],["My role","Sound design, character voice editing, mix & master"],["DAW","Cubase 13"]],"points":["Dragon: the dragon's fury is carried by mid and low frequencies to keep the battle tense, with comic moments placed in between to make it fun.","Voices: I searched library sources that suit each character and placed voices that fit each situation.","Foley: for the grand 3D visuals I paid close attention to Foley, and used panning so the sound feels more real."],"links":[],"chapters":[],"hls":"media/06eVmlKTqvA/hls/index.txt","fallback":"media/06eVmlKTqvA/fallback.mp4","poster":"img/사진넣기_영상_06eVmlKTqvA.jpg","duration":105,"height":1080},{"id":"4crZ2vKl_8o","si":5,"title":"Dungeon & Fighter: Overkill","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","Neople · Nexon"],["Engine","Unreal Engine 4"],["Genre","Action"],["Platform","PC · Android · iOS"],["My role","Sound design, mix & master"],["DAW","Cubase 13"]],"points":["Impact: the crisp, satisfying hit feel the original Dungeon & Fighter is known for was the main focus of the sound.","Character gear: mid-range sounds lead, to bring out the character of each piece of equipment.","Weight: low impacts make the frame feel grand and keep the sound solid on speakers, which makes each scene more fun."],"links":[],"chapters":[],"hls":"media/4crZ2vKl_8o/hls/index.txt","fallback":"media/4crZ2vKl_8o/fallback.mp4","poster":"img/사진넣기_영상_4crZ2vKl_8o.jpg","duration":68,"height":1080}];
   var V = document.getElementById('player'), state = document.getElementById('vstate'), info = document.getElementById('vinfo');
   var hls = null, cur = -1, usingFallback = false, watchdog = null;
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
@@ -693,7 +696,59 @@ html:not(.ed-mode) :is([data-k="profile.facts"]) { display: none !important; }
   });
   // 편집 모드(edit-design.js)가 구간을 더하고 뺄 때 다시 그리려고 내놓음
   window.PF = { VIDS: VIDS, renderInfo: renderInfo, cur: function () { return cur; } };
+  // 구역 순서(site.json sectionOrder, 편집 화면 왼쪽 「페이지」 판에서 바꿈) — 구역 · 위 메뉴를 그 순서로
+  (function () {
+    var ORDER = ["videos","projects","work","programs","notes","contact"];
+    var root = document.getElementById('top'); if (!root || !ORDER.length) return;
+    var secs = [].slice.call(root.children).filter(function (n) { return n.tagName === 'SECTION' && n.id; });
+    var after = secs.length ? secs[0].previousElementSibling : null;
+    ORDER.forEach(function (id) { var s = document.getElementById(id); if (s && s.parentNode === root) { if (after) after.after(s); else root.prepend(s); after = s; } });
+    var nav = document.querySelector('.nav');
+    if (nav) ORDER.forEach(function (id) { var a = nav.querySelector('a[href="#' + id + '"]'); if (a) nav.appendChild(a); });
+  })();
   if (VIDS.length) load(0, false);
+
+  // 안에 보이는 글 · 사진 · 영상이 하나도 없는 구역과 줄(테두리 선이 있는 칸)은 선까지 통째로 숨긴다(2026-10-25 사용자:
+  // 글을 다 지웠는데 선만 남아 지저분함). 공개 페이지와 편집 화면 모두. 편집 화면에선 글 · 숨김이 바뀔 때마다 다시 잰다
+  (function () {
+    var root = document.getElementById('top'); if (!root) return;
+    var shown = function (n) { return n.getClientRects().length > 0; };
+    function hasContent(el) {
+      var a = document.activeElement; if (a && a.isContentEditable && el.contains(a)) return true;
+      var m = el.querySelectorAll('img,video,iframe,svg,canvas,input,select,textarea');
+      for (var i = 0; i < m.length; i++) if (shown(m[i])) return true;
+      var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), t;
+      while ((t = w.nextNode())) if (t.nodeValue.trim() && t.parentElement && shown(t.parentElement)) return true;
+      return false;
+    }
+    var busy = false;
+    function run() {
+      if (busy) return; busy = true;
+      document.querySelectorAll('.pf-void').forEach(function (e) { e.classList.remove('pf-void'); });
+      var all = [].slice.call(root.querySelectorAll('section, section *')).filter(function (el) {
+        if (el.closest('[hidden]')) return false;   // 접힌 탭 안은 판단하지 않음
+        if (el.tagName === 'SECTION') return true;
+        if (!el.querySelector('[data-k],[data-m],img')) return false;   // 장식 선(내용이 원래 없는 칸)은 그대로
+        var cs = getComputedStyle(el);
+        return parseFloat(cs.borderTopWidth) > 0 || parseFloat(cs.borderBottomWidth) > 0;
+      });
+      all.reverse().forEach(function (el) {   // 안쪽부터
+        if (!hasContent(el)) {
+          el.classList.add('pf-void');
+          if (el.tagName === 'SECTION' && el.id) document.querySelectorAll('a[href="#' + el.id + '"]').forEach(function (a) { a.classList.add('pf-void'); });
+        }
+      });
+      busy = false;
+    }
+    var tm = 0; function later() { clearTimeout(tm); tm = setTimeout(run, 120); }
+    window.PF_void = run;
+    run(); window.addEventListener('load', later);
+    if (document.documentElement.classList.contains('ed-mode') || /[?&]edit/.test(location.search)) {
+      new MutationObserver(later).observe(root, { childList: true, subtree: true, characterData: true });
+      new MutationObserver(later).observe(document.head, { childList: true, subtree: true, characterData: true });
+      document.addEventListener('focusin', later); document.addEventListener('focusout', later);
+    }
+  })();
 
   // 영상 기획서 화면 — 주소 끝이 #plan-<id> 이면 본문 대신 그 기획서를 보인다. 다른 # 이면 본문으로 돌아온다
   var MAIN = document.getElementById('top');
