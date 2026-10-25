@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Gyu Hun Kim · Sound Design Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* 배치: 1200px 12단 격자, 왼쪽 정렬. 면 대신 선으로 나눈다.
+   색: 자기소개서 · 포트폴리오 PDF 와 같은 흰 바탕 + 남색(#1F4E8C) 하나. 일부러 밝은 한 가지 모습으로 고정 */
+:root {
+  --bg: #ffffff; --bg2: #f6f7f9; --line: #e3e7ee; --line2: #c9d2df;
+  --dim: #6b7482; --body: #2e3440; --hi: #13233d; --g: #1f4e8c; --g-line: rgba(31, 78, 140, .35);
+  --sans: "IBM Plex Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Consolas", monospace;
+  --wrap: 1200px; color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--body); font: 400 15px/1.75 var(--sans); -webkit-user-select: none; user-select: none; }
+.sel { -webkit-user-select: text; user-select: text; }
+/* 지운 글(빈 칸)은 공개 페이지에서 안 보이게 — 편집 모드에서는 "비어 있음" 칸으로 다시 보임 */
+[data-k]:empty { display: none; }
+/* 글 상자 안 줄바꿈(편집 화면 Shift+Enter · Shift+Space)을 그대로 보이게 */
+[data-k]:not(:has([data-k])) { white-space: pre-line; }
+img, video { max-width: 100%; display: block; -webkit-user-drag: none; }
+a { color: var(--hi); text-decoration: none; border-bottom: 1px solid var(--g-line); }
+a:hover, a:focus-visible { border-bottom-color: var(--g); }
+:focus-visible { outline: 2px solid var(--g); outline-offset: 2px; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding-inline: 24px; }
+h1, h2, h3 { color: var(--hi); font-weight: 700; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+
+/* 상단 */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; gap: 24px; min-height: 56px; flex-wrap: wrap; }
+.brand { color: var(--hi); font-weight: 700; border: 0; letter-spacing: .01em; }
+.brand span + span { color: var(--dim); font: 400 12px var(--mono); margin-left: 8px; }
+.nav { display: flex; gap: 20px; margin-left: auto; flex-wrap: wrap; }
+.nav a { border: 0; color: var(--dim); font-size: 14px; }
+.nav a:hover, .nav a:focus-visible { color: var(--hi); }
+
+/* 첫 화면 */
+.hero { padding-block: 72px 56px; border-bottom: 1px solid var(--line); }
+.label { font: 500 12px/1.4 var(--mono); color: var(--g); letter-spacing: .06em; }
+.hero h1 { font-size: clamp(40px, 7vw, 72px); line-height: 1.05; margin-top: 16px; letter-spacing: -.01em; color: var(--g); }
+.hero h1 small { display: block; font: 400 15px/1.6 var(--sans); color: var(--dim); margin-top: 12px; letter-spacing: 0; }
+.hero-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; margin-top: 40px; }
+.hero-intro { grid-column: 1 / span 7; max-width: 62ch; color: var(--body); font-size: 16px; }
+.hero-facts { grid-column: 9 / span 4; border-top: 1px solid var(--line2); }
+.hero-facts li { padding-block: 10px; border-bottom: 1px solid var(--line); font-size: 14px; }
+
+/* 구역 공통 */
+section { padding-block: 64px; border-bottom: 1px solid var(--line); }
+.sec-h { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; border-top: 2px solid var(--g); padding-top: 16px; margin-bottom: 32px; }
+.sec-h h2 { font-size: 28px; }
+.sec-h .note { color: var(--dim); font-size: 13px; }
+.kind { font: 500 12px/1.4 var(--mono); color: var(--g); letter-spacing: .04em; }
+.sub { color: var(--dim); font-size: 13px; }
+.lines li { position: relative; padding-left: 16px; margin-top: 6px; }
+.lines li::before { content: ""; position: absolute; left: 0; top: .85em; width: 8px; height: 1px; background: var(--dim); }
+
+/* 영상 */
+.vgrid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px 24px; }
+.vmain { grid-column: 1 / span 8; min-width: 0; }
+.vside { grid-column: 9 / span 4; min-width: 0; border-top: 1px solid var(--line2); }
+.player { position: relative; background: #000; aspect-ratio: 16 / 9; border: 1px solid var(--line); }
+.player video { width: 100%; height: 100%; object-fit: contain; background: #000; }
+/* 화면 가운데를 누르면 재생 · 정지. 아래 조작 막대(56px)는 비워 둬서 원래 조작이 그대로 됨 */
+.vhit { all: unset; position: absolute; left: 0; right: 0; top: 0; bottom: 56px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.bigplay { width: 76px; height: 76px; border-radius: 50%; background: rgba(19, 35, 61, .72); border: 1px solid rgba(255, 255, 255, .5); position: relative; opacity: 0; transition: opacity .15s; }
+.bigplay::after { content: ""; position: absolute; left: 30px; top: 22px; border-style: solid; border-width: 16px 0 16px 26px; border-color: transparent transparent transparent #fff; }
+.player.paused .bigplay, .vhit:focus-visible .bigplay { opacity: 1; }
+.player.paused .vhit:hover .bigplay { background: rgba(31, 78, 140, .9); }
+.player .wm { position: absolute; right: 12px; top: 10px; font: 400 11px var(--mono); color: rgba(255, 255, 255, .45); pointer-events: none; }
+.vstate { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; font: 400 12px var(--mono); color: var(--dim); }
+.vstate b { color: var(--g); font-weight: 500; }
+.vinfo { margin-top: 24px; }
+.vinfo h3 { font-size: 22px; margin-top: 6px; }
+.vmeta { display: grid; grid-template-columns: max-content 1fr; gap: 4px 20px; margin: 16px 0 0; font-size: 14px; }
+.vmeta dt { color: var(--dim); } .vmeta dd { margin: 0; color: var(--body); }
+.vblock { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); }
+.vblock h4 { margin: 0 0 4px; font: 500 12px var(--mono); color: var(--dim); letter-spacing: .04em; }
+/* 바로 플레이 — 게임잼 결과물을 직접 해 볼 수 있게 크게. 남색 한 덩어리 + 선, 둥근 알약 모양은 쓰지 않음 */
+.ext.play { margin-top: 20px; }
+.play-btn { display: inline-grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; column-gap: 16px; padding: 16px 22px; background: var(--g); color: #fff; border: 0; min-width: min(100%, 420px); transition: background .15s; }
+.play-btn:hover, .play-btn:focus-visible { background: var(--hi); border: 0; }
+.play-ic { font-size: 18px; }
+.play-txt { display: grid; row-gap: 2px; }
+.play-txt > span:first-child { font-size: 18px; font-weight: 700; }
+.play-sub { font-size: 12px; color: rgba(255, 255, 255, .78); }
+.play-go { font-size: 18px; }
+.fig-play { display: block; position: relative; border: 0; }
+.fig-play-ic { position: absolute; left: 0; bottom: 0; padding: 8px 14px; background: var(--g); color: #fff; font: 700 13px var(--sans); }
+.fig-play:hover .fig-play-ic { background: var(--hi); }
+/* 학습노트 — Why? 이야기 · 갈래 작은 탭 · 왜? 질문(누르면 답) */
+.nwhy { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding-bottom: 32px; border-bottom: 1px solid var(--line); }
+.nwhy-mark { grid-column: 1 / span 3; font: 700 clamp(40px, 6vw, 64px)/1 var(--sans); color: var(--g); letter-spacing: -.01em; }
+.nwhy-text { grid-column: 4 / span 8; font-size: 17px; line-height: 1.8; color: var(--hi); }
+.nwhy-text p + p { margin-top: 10px; color: var(--body); font-size: 15px; }
+.ntabs { display: flex; gap: 28px; margin-top: 32px; border-bottom: 1px solid var(--line2); flex-wrap: wrap; }
+.ntab { all: unset; cursor: pointer; padding: 10px 0; margin-bottom: -1px; font-size: 15px; color: var(--dim); border-bottom: 2px solid transparent; }
+.ntab:hover { color: var(--hi); }
+.ntab.on { color: var(--hi); font-weight: 700; border-bottom-color: var(--g); }
+.npanel { padding-top: 8px; }
+.qa { border-bottom: 1px solid var(--line); }
+.qa summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; column-gap: 12px; align-items: baseline; padding: 16px 0; }
+.qa summary::-webkit-details-marker { display: none; }
+.qa summary::before { content: "Q"; font: 500 13px var(--mono); color: var(--g); }
+.qa-q { font-size: 16px; color: var(--hi); font-weight: 500; }
+.qa-ch { font: 400 12px var(--mono); color: var(--dim); white-space: nowrap; }
+.qa summary:hover .qa-q { color: var(--g); }
+.qa[open] summary .qa-q { color: var(--g); }
+.qa-a { margin: 0 0 18px 40px; max-width: 70ch; color: var(--body); }
+.qa-a::before { content: "A  "; font: 500 13px var(--mono); color: var(--dim); }
+.ntab .cnt { font: 400 12px var(--mono); color: var(--dim); margin-left: 4px; }
+.npanel .nshots { margin-top: 24px; }
+.npanel .nshots .gal { grid-column: 1 / span 9; }
+.nlist.ncols2 { columns: 2; column-gap: 32px; margin-top: 8px; }
+.nlist.ncols2 li { break-inside: avoid; }
+@media (max-width: 900px) { .nlist.ncols2 { columns: 1; } .npanel .nshots .gal { grid-column: 1 / -1; } }
+.nall { margin-top: 20px; }
+.nall > summary { cursor: pointer; font-size: 13px; color: var(--dim); padding: 8px 0; }
+.nall > summary .cnt { font: 400 12px var(--mono); margin-left: 6px; }
+.nall .nlist { columns: 2; column-gap: 32px; }
+.nall .nlist li { break-inside: avoid; }
+@media (max-width: 900px) { .nwhy-mark, .nwhy-text { grid-column: 1 / -1; } .nwhy-text { margin-top: 12px; } .nall .nlist { columns: 1; } .qa summary { grid-template-columns: 22px minmax(0, 1fr); } .qa-ch { grid-column: 2; } }
+/* 구간(하이라이트): 시작 – 끝 · 이름. 줄을 누르면 시작부터 재생 */
+.chap-row { display: grid; grid-template-columns: 18px 112px minmax(0, 1fr) auto; column-gap: 10px; align-items: baseline; padding-block: 6px; border-bottom: 1px solid var(--line); cursor: pointer; color: var(--body); }
+.chap-row:hover { color: var(--hi); }
+.chap-go { all: unset; cursor: pointer; font-size: 10px; color: var(--g); }
+.chap-time { font: 400 13px var(--mono); color: var(--g); white-space: nowrap; }
+.chap-time:has([data-k$=".2"]:empty) .chap-dash { display: none; }
+.chap-add, .chap-del { all: unset; cursor: pointer; font-size: 12px; color: var(--g); }
+.chap-del { color: #b42318; }
+.chap-add { margin-top: 10px; display: inline-block; border-bottom: 1px solid var(--g-line); }
+html:not(.ed-mode) .ed-only { display: none !important; }
+html:not(.ed-mode) .chap:not(:has(.chap-row)) { display: none; }
+.vrow { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: 128px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 14px; padding-block: 12px; border-bottom: 1px solid var(--line); width: 100%; }
+.vrow img { grid-row: 1 / span 2; width: 128px; height: 72px; object-fit: cover; opacity: .75; }
+.vrow-t { color: var(--body); font-weight: 500; align-self: end; }
+.vrow-m { color: var(--dim); font: 400 12px var(--mono); }
+.vrow:hover img, .vrow.on img { opacity: 1; }
+.vrow.on .vrow-t { color: var(--hi); }
+.vrow.on { box-shadow: inset 2px 0 0 var(--g); padding-left: 10px; }
+
+/* 실무·대회 */
+.whead { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; margin-bottom: 24px; }
+.whead > div { grid-column: 1 / span 7; }
+.whead h3 { font-size: 22px; margin-top: 6px; }
+.whead p + p { margin-top: 8px; }
+.row { display: flex; gap: 32px; padding-block: 32px; border-top: 1px solid var(--line); flex-wrap: wrap; }
+.row-fig { margin: 0; flex: 0 1 var(--w); min-width: 0; max-width: 100%; }
+.row-fig img { width: 100%; height: auto; }
+.row-fig figcaption { font-size: 11px; color: var(--dim); margin-top: 6px; }
+.row-txt { flex: 1 1 320px; min-width: 0; max-width: 62ch; }
+.row-txt h3 { font-size: 20px; margin-top: 6px; }
+.row-txt .lines { margin-top: 12px; }
+.ext { margin-top: 12px; font-size: 14px; }
+.extra-rows > .row:first-child { border-top: 0; padding-top: 0; }
+/* 참여 프로젝트 표 — 갈래 2 · 이름 4 · 내용 6 단. 머리줄 밑 남색 굵은 선, 갈래가 바뀌면 끝까지 선, 같은 갈래 안에선 이름 칸부터 선 */
+.pj-head { max-width: 62ch; margin-bottom: 32px; }
+.pj-head h3 { font-size: 22px; }
+.pj-head p { margin-top: 8px; }
+.pj-head p.sub { margin-top: 4px; }
+.pj-row { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 4fr) minmax(0, 6fr); column-gap: 24px; position: relative; }
+.pj-row > * { padding-block: 18px; }
+.pj-row:not(.pj-th) > :not(.pj-grp) { border-top: 1px solid var(--line2); }
+.pj-row.pj-g::before { content: ""; position: absolute; left: 0; right: 0; top: 0; border-top: 1px solid var(--line2); }
+.pj-th + .pj-row::before, .pj-th + .pj-row > * { border-top: 0 !important; }
+.pj-th > p { padding-block: 0 12px; font-size: 13px; font-weight: 700; color: var(--dim); }
+.pj-th { border-bottom: 2px solid var(--g); }
+.pj-grp { font-size: 13px; font-weight: 700; color: var(--dim); }
+.pj-name h4 { margin: 0; font-size: 17px; color: var(--hi); font-weight: 700; }
+.pj-name .sub { margin-top: 2px; }
+.pj-desc li { color: var(--body); }
+.pj-desc li + li { margin-top: 2px; }
+@media (max-width: 720px) {
+  .pj-th { display: none; }
+  .pj-row { grid-template-columns: minmax(0, 1fr); }
+  .pj-row > * { padding-block: 0; }
+  .pj-row:not(.pj-th) > :not(.pj-grp) { border-top: 0; }
+  .pj-row { padding-block: 16px; border-top: 1px solid var(--line); }
+  .pj-row.pj-g::before { display: none; }
+  .pj-row.pj-g { border-top: 2px solid var(--g); margin-top: 8px; }
+  .pj-grp:empty { display: none; }
+  .pj-grp { margin-bottom: 6px; }
+  .pj-desc { margin-top: 8px; }
+}
+.subsec { margin-top: 48px; }
+.subsec > h3 { font-size: 18px; padding-top: 12px; border-top: 1px solid var(--line2); }
+
+/* 프로그램 */
+.prog { padding-block: 40px; border-top: 1px solid var(--line); }
+.prog:first-of-type { border-top: 0; padding-top: 0; }
+.prog-h h3 { font-size: 24px; }
+.prog-body { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; margin-top: 16px; }
+.prog-txt { grid-column: 1 / span 4; min-width: 0; }
+.prog-txt .why { color: var(--body); }
+.prog-txt .facts { margin-top: 14px; font: 400 13px/1.7 var(--mono); color: var(--g); }
+.gal { grid-column: 5 / span 8; min-width: 0; }
+.gal-main { margin: 0; position: relative; }
+.gal-main img { width: 100%; height: auto; border: 1px solid var(--line); }
+.gal-main figcaption { font-size: 12px; color: var(--dim); margin-top: 8px; }
+.gal-thumbs { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.gal-thumbs button { all: unset; cursor: pointer; width: 112px; border: 1px solid var(--line); opacity: .55; }
+.gal-thumbs button.on, .gal-thumbs button:hover { opacity: 1; border-color: var(--g); }
+.gal-thumbs img { width: 100%; height: 64px; object-fit: cover; }
+/* 옆으로 넘겨 보기 */
+.sl { min-width: 0; }
+.sl-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; outline: 0; cursor: grab; }
+.sl-track::-webkit-scrollbar { display: none; }
+.sl-track.drag { scroll-snap-type: none; cursor: grabbing; user-select: none; }
+.sl-track:focus-visible { box-shadow: 0 0 0 1px var(--g); }
+.sl-item { flex: 0 0 100%; margin: 0; scroll-snap-align: start; min-width: 0; }
+.sl-item img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: var(--bg2); border: 1px solid var(--line); }
+.sl-item figcaption { font-size: 13px; color: var(--dim); margin-top: 10px; padding-right: 8px; }
+.sl-item figcaption b { color: var(--hi); font-weight: 600; margin-right: 10px; }
+.sl-bar { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
+.sl-bar button { all: unset; box-sizing: border-box; cursor: pointer; width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--line2); color: var(--hi); font-size: 16px; }
+.sl-bar button:hover, .sl-bar button:focus-visible { border-color: var(--g); color: var(--g); }
+.sl-bar button[disabled] { opacity: .3; cursor: default; border-color: var(--line); color: var(--dim); }
+.sl-n { font: 400 13px var(--mono); color: var(--dim); min-width: 56px; }
+.sl-n b { color: var(--g); font-weight: 500; }
+.sl-line { flex: 1; height: 1px; background: var(--line2); position: relative; }
+.sl-line i { position: absolute; left: 0; top: -1px; height: 3px; background: var(--g); transition: left .25s, width .25s; }
+.row-sl { flex-basis: var(--w); }
+.pgm-sl { max-width: 1040px; }
+.pgm-txt { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line2); }
+.pgm-col { grid-column: span 6; min-width: 0; }
+.pgm-col h3 { font-size: 15px; color: var(--dim); font-weight: 500; margin-bottom: 8px; }
+.pgm-list li { display: grid; grid-template-columns: 36px minmax(0, 1fr); column-gap: 8px; padding-block: 12px; border-bottom: 1px solid var(--line); }
+.pgm-list li[data-to] { cursor: pointer; }
+.pgm-no { grid-row: 1 / span 2; font: 400 13px var(--mono); color: var(--dim); padding-top: 3px; }
+.pgm-name { color: var(--hi); font-weight: 600; font-size: 16px; }
+.pgm-one { color: var(--dim); font-size: 14px; }
+.pgm-list li.on .pgm-no, .pgm-list li.on .pgm-name { color: var(--g); }
+.pgm-list li[data-to]:hover .pgm-name { color: var(--g); }
+.pgm-p { color: var(--body); }
+.pgm-p + .pgm-p { margin-top: 14px; }
+@media (max-width: 900px) { .pgm-col { grid-column: 1 / -1; } }
+.slot { width: 100%; border: 1px dashed var(--line2); display: flex; align-items: center; justify-content: flex-start; padding: 16px; background: var(--bg2); }
+.slot span { font: 400 12px/1.6 var(--mono); color: var(--dim); }
+.gal.slots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+
+/* 학습노트 */
+.ncols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 24px; }
+.ncol h3 { font-size: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--line2); }
+.ncol .cnt { color: var(--dim); font: 400 12px var(--mono); margin-left: 6px; }
+.nlist li { display: grid; grid-template-columns: 36px minmax(0, 1fr); column-gap: 8px; padding-block: 10px; border-bottom: 1px solid var(--line); }
+.nlist .no { grid-row: 1 / span 2; font: 400 13px var(--mono); color: var(--g); }
+.nlist .nt { color: var(--hi); font-size: 14px; }
+.nlist .ns { color: var(--dim); font-size: 13px; }
+.nshots { margin-top: 40px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); }
+.nshots .gal { grid-column: 1 / span 9; }
+
+/* 연락 */
+.contact { display: grid; grid-template-columns: max-content 1fr; gap: 10px 24px; font-size: 15px; }
+.contact dt { color: var(--dim); } .contact dd { margin: 0; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.copy { all: unset; cursor: pointer; font: 400 12px var(--mono); color: var(--g); border-bottom: 1px solid var(--g-line); }
+footer { padding-block: 32px 48px; font-size: 12px; color: var(--dim); }
+
+/* 영상 기획서 화면 — 포트폴리오 본문 대신 보인다(#plan-<id>). 글은 8단 폭, 장 제목마다 굵은 선 */
+.plan { padding-block: 40px 72px; }
+.plan .back { font-size: 14px; }
+.plan .back.end { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--line); }
+.plan-h { margin-top: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--line); max-width: 62rem; }
+.plan-h h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.2; margin-top: 8px; color: var(--g); }
+.plan-h .sub { font-size: 15px; margin-top: 10px; }
+.plan-play { margin-top: 20px; }
+.plan-body { max-width: 760px; }
+.plan-body h2 { font-size: 22px; margin-top: 56px; padding-top: 14px; border-top: 2px solid var(--g); }
+.plan-body h3 { font-size: 16px; margin-top: 28px; }
+.plan-body .pb-h2 + .pb-h3 h3 { margin-top: 20px; }
+.plan-body .pp { margin-top: 12px; }
+.plan-body .lines { margin-top: 10px; }
+.plan-body blockquote { margin: 20px 0 0; padding: 4px 0 4px 16px; border-left: 2px solid var(--g); color: var(--hi); }
+.pdl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 24px; margin: 12px 0 0; padding-block: 12px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: 14px; }
+.pdl dt { color: var(--dim); } .pdl dd { margin: 0; color: var(--body); }
+.pfig { margin: 24px 0 0; max-width: min(100%, var(--w)); }
+.pfig img { width: 100%; height: auto; border: 1px solid var(--line); }
+.pfig figcaption { font-size: 12px; color: var(--dim); margin-top: 8px; }
+.cues { margin-top: 12px; border-top: 1px solid var(--line2); }
+.cues li { display: grid; grid-template-columns: 140px minmax(0, 1fr); column-gap: 20px; padding-block: 10px; border-bottom: 1px solid var(--line); font-size: 14px; }
+.cue { all: unset; cursor: pointer; font: 500 13px/1.7 var(--mono); color: var(--g); border-bottom: 1px solid transparent; align-self: start; justify-self: start; }
+.cue:hover, .cue:focus-visible { border-bottom-color: var(--g); }
+.plan-play .cue { font: 500 14px var(--sans); }
+
+/* 더한 사진 — 구역 맨 위 0 높이 칸에 겹쳐 두고 옮기기로 자리를 정함 */
+.wrap { position: relative; }
+.free-photos { position: relative; height: 0; z-index: 2; }
+.free-ph { position: absolute; left: 0; top: 0; margin: 0; width: var(--w); max-width: 100%; }
+.free-ph img { width: 100%; height: auto; display: block; }
+.free-ph figcaption { font-size: 12px; color: var(--dim); margin-top: 6px; background: var(--bg); }
+@media (max-width: 900px) {
+  .free-photos { height: auto; display: grid; gap: 16px; margin-bottom: 24px; }
+  .free-ph { position: static; }
+}
+@media (max-width: 900px) {
+  .hero-intro, .hero-facts, .vmain, .vside, .prog-txt, .gal, .nshots .gal, .whead > div { grid-column: 1 / -1; }
+  .ncols { grid-template-columns: minmax(0, 1fr); }
+  section { padding-block: 48px; }
+}
+/* 옮긴 자리 (편집 모드 "옮기기"로 정함) */
+</style><style id="dz-baked">
+
+@media (min-width: 901px) {
+[data-m="ph:p1"] { transform: translate(852px, 12px); width: 186px; max-width: none; flex-basis: 186px; --w: 186px; } [data-m="ph:p1"]:is(span, a, b) { display: inline-block; }
+}
+</style><style>
+/* 뺀 것 (편집 모드 [✕ 빼기]) */
+html:not(.ed-mode) :is([data-k="profile.facts"]) { display: none !important; }
+@media (max-width: 520px) {
+  .wrap { padding-inline: 16px; }
+  .vrow { grid-template-columns: 96px minmax(0, 1fr); } .vrow img { width: 96px; height: 54px; }
+  .cues li { grid-template-columns: minmax(0, 1fr); row-gap: 2px; }
+  .nav { gap: 14px; margin-left: 0; }
+}
+</style>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="#top"><span data-k="profile.name">Gyu Hun Kim</span><span data-k="profile.nameEn">Portfolio</span></a>
+  <nav class="nav" aria-label="구역"><a href="#projects"><span data-k="labels.nav_projects">Projects</span></a><a href="#videos"><span data-k="labels.nav_videos">Reel</span></a><a href="#work"><span data-k="labels.nav_extra">Awards</span></a><a href="#programs"><span data-k="labels.nav_programs">Tools</span></a><a href="#notes"><span data-k="labels.nav_notes">Notes</span></a><a href="#contact"><span data-k="labels.nav_contact">Contact</span></a></nav>
+</div></header>
+
+<main id="top">
+  <div class="hero"><div class="wrap">
+    <div class="free-photos" data-sec="hero">
+      <figure class="free-ph" data-slot="사진넣기/추가_p1" data-m="ph:p1" style="--w:170px">
+        <img src="img/사진넣기_추가_p1.jpg" alt="" loading="lazy" draggable="false">
+        <figcaption data-k="photos.0.caption"></figcaption>
+      </figure></div>
+    <p class="label" data-k="profile.role">Sound Designer · Trailer &amp; Cinematic · Voice Director</p>
+    <h1><span data-k="profile.name">Gyu Hun Kim</span><small data-k="profile.tagline">A designer who makes joyful sound</small></h1>
+    <div class="hero-grid">
+      <p class="hero-intro" data-k="profile.intro">Applicant · Cinematic Sound Designer (Linear Content Team), Sweet Justice Sound</p>
+      <ul class="hero-facts" data-k="profile.facts"></ul>
+    </div>
+  </div></div>
+
+  <section id="projects"><div class="wrap">
+    <div class="sec-h"><h2><span data-k="labels.projects">Projects</span></h2><p class="note" data-k="work.period"></p></div>
+    <div class="free-photos" data-sec="projects"></div>
+    <div class="pj-head" data-m="box:pjhead">
+      <h3 data-k="projects.title">Professional &amp; Team Projects</h3>
+      <p data-k="work.summary"></p><p class="sub" data-k="work.note">Under contract, I can share project names and my roles, but not the delivered audio.</p>
+    </div>
+    <div class="pj">
+      <div class="pj-row pj-th"><p></p><p><span data-k="labels.pjColName">Project</span></p><p><span data-k="labels.pjColDesc">What I did</span></p></div>
+      <div class="pj-row pj-g">
+        <p class="pj-grp" data-k="projects.rows.0.group">SFX</p>
+        <div class="pj-name" data-m="box:pj.0"><h4 data-k="projects.rows.0.title">MapleStory</h4><p class="sub" data-k="projects.rows.0.client">Nexon · July update</p></div>
+        <ul class="pj-desc" data-k="projects.rows.0.lines"><li data-k="projects.rows.0.lines.0">About 110 skill SFX for the Warrior, Pirate and Thief classes</li></ul>
+      </div>
+      <div class="pj-row">
+        <p class="pj-grp"></p>
+        <div class="pj-name" data-m="box:pj.1"><h4 data-k="projects.rows.1.title">Pizza Oof!</h4><p class="sub" data-k="projects.rows.1.client">Newmatic · Steam Early Access, 2026.07.09</p></div>
+        <ul class="pj-desc" data-k="projects.rows.1.lines"><li data-k="projects.rows.1.lines.0">AMB and SFX design, implemented the SFX in Unreal Engine myself</li></ul>
+      </div>
+      <div class="pj-row pj-g">
+        <p class="pj-grp" data-k="projects.rows.2.group">Trailer</p>
+        <div class="pj-name" data-m="box:pj.2"><h4 data-k="projects.rows.2.title">Warframe</h4><p class="sub" data-k="projects.rows.2.client">Digital Extremes</p></div>
+        <ul class="pj-desc" data-k="projects.rows.2.lines"><li data-k="projects.rows.2.lines.0">Voice recording direction for an official gameplay trailer (Studio Monkey)</li></ul>
+      </div>
+      <div class="pj-row pj-g">
+        <p class="pj-grp" data-k="projects.rows.3.group">Voice</p>
+        <div class="pj-name" data-m="box:pj.3"><h4 data-k="projects.rows.3.title">Samsung Bixby × Wuthering Waves</h4><p class="sub" data-k="projects.rows.3.client">Samsung Electronics</p></div>
+        <ul class="pj-desc" data-k="projects.rows.3.lines"><li data-k="projects.rows.3.lines.0">Character voice, 9,000 lines: recording direction, RX and QC (solo)</li><li data-k="projects.rows.3.lines.1">Went from 100 lines a day to 600 or 700 lines in four to five hours, always with a second QC pass</li></ul>
+      </div>
+      <div class="pj-row">
+        <p class="pj-grp"></p>
+        <div class="pj-name" data-m="box:pj.4"><h4 data-k="projects.rows.4.title">Overgeared · Blue Archive</h4><p class="sub" data-k="projects.rows.4.client">Grey Games · Nexon Games</p></div>
+        <ul class="pj-desc" data-k="projects.rows.4.lines"><li data-k="projects.rows.4.lines.0">About 6,000 voice lines of RX, cleanup and QC, both delivered in the same weeks</li></ul>
+      </div>
+      <div class="pj-row pj-g">
+        <p class="pj-grp" data-k="projects.rows.5.group">Global</p>
+        <div class="pj-name" data-m="box:pj.5"><h4 data-k="projects.rows.5.title">CHINAJOY 2026</h4><p class="sub" data-k="projects.rows.5.client">Studio Monkey booth</p></div>
+        <ul class="pj-desc" data-k="projects.rows.5.lines"><li data-k="projects.rows.5.lines.0">Presented our voice and sound work in English to international visitors for 3 days</li><li data-k="projects.rows.5.lines.1">Interpreted for the CEO and ran the booth</li></ul>
+      </div>
+      <div class="pj-row">
+        <p class="pj-grp"></p>
+        <div class="pj-name" data-m="box:pj.6"><h4 data-k="projects.rows.6.title">Investor meeting (DOD)</h4><p class="sub" data-k="projects.rows.6.client">2026.10 · Seoul</p></div>
+        <ul class="pj-desc" data-k="projects.rows.6.lines"><li data-k="projects.rows.6.lines.0">Interpreted English and Korean between DOD&#39;s US-side investors and a bank branch manager</li></ul>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="videos"><div class="wrap">
+    <div class="sec-h"><h2><span data-k="labels.videos">Trailer &amp; Cinematic Reel</span></h2><p class="note"><span data-k="labels.videosCount">6 videos · about 10 min ·</span> <span data-k="labels.videosNote">Please listen with headphones or earphones.</span></p></div>
+    <div class="free-photos" data-sec="videos"></div>
+    <div class="vgrid">
+      <div class="vmain">
+        <div class="player paused" data-m="player"><video id="player" controls playsinline preload="metadata" controlslist="nodownload noremoteplayback" disablepictureinpicture disableremoteplayback></video><button type="button" class="vhit" id="vhit" aria-label="Play / Pause"><span class="bigplay" aria-hidden="true"></span></button><span class="wm" data-k="labels.playerMark">© Gyu Hun Kim</span></div>
+        <p class="vstate" id="vstate"></p>
+        <div class="vinfo" id="vinfo" data-m="vinfo"></div>
+      </div>
+      <ol class="vside" id="vlist" data-m="vlist">
+      <li data-id="qJQO0FiphRs"><button type="button" class="vrow" data-i="0" aria-label="The Last of Us Part II 재생">
+        <img src="img/사진넣기_영상_qJQO0FiphRs.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_qJQO0FiphRs">
+        <span class="vrow-t">The Last of Us Part II</span>
+        <span class="vrow-m">Trailer (gameplay edit) · Sound Redesign · 2:26</span>
+      </button></li>
+      <li data-id="kYxwDrfYFCw"><button type="button" class="vrow" data-i="1" aria-label="ArcheAge War 재생">
+        <img src="img/사진넣기_영상_kYxwDrfYFCw.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_kYxwDrfYFCw">
+        <span class="vrow-t">ArcheAge War</span>
+        <span class="vrow-m">Trailer · Sound Redesign · 1:38</span>
+      </button></li>
+      <li data-id="rc-eExao-ls"><button type="button" class="vrow" data-i="2" aria-label="LORDNINE 재생">
+        <img src="img/사진넣기_영상_rc-eExao-ls.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_rc-eExao-ls">
+        <span class="vrow-t">LORDNINE</span>
+        <span class="vrow-m">Trailer · Sound Redesign · 1:17</span>
+      </button></li>
+      <li data-id="4crZ2vKl_8o"><button type="button" class="vrow" data-i="3" aria-label="Dungeon &amp; Fighter: Overkill 재생">
+        <img src="img/사진넣기_영상_4crZ2vKl_8o.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_4crZ2vKl_8o">
+        <span class="vrow-t">Dungeon &amp; Fighter: Overkill</span>
+        <span class="vrow-m">Trailer · Sound Redesign · 1:08</span>
+      </button></li>
+      <li data-id="wBZLKIVBC8w"><button type="button" class="vrow" data-i="4" aria-label="Back 4 Blood 재생">
+        <img src="img/사진넣기_영상_wBZLKIVBC8w.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_wBZLKIVBC8w">
+        <span class="vrow-t">Back 4 Blood</span>
+        <span class="vrow-m">Trailer · Sound Redesign · 1:47</span>
+      </button></li>
+      <li data-id="06eVmlKTqvA"><button type="button" class="vrow" data-i="5" aria-label="Dungeons &amp; Dragons 재생">
+        <img src="img/사진넣기_영상_06eVmlKTqvA.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_06eVmlKTqvA">
+        <span class="vrow-t">Dungeons &amp; Dragons</span>
+        <span class="vrow-m">Cinematic trailer · Sound Redesign · 1:45</span>
+      </button></li>
+      </ol>
+    </div>
+  </div></section>
+
+  <section id="work"><div class="wrap">
+    <div class="sec-h"><h2><span data-k="labels.extra">Awards &amp; Game Jam</span></h2></div>
+    <div class="free-photos" data-sec="work"></div>
+    <div class="extra-rows">
+    <article class="row">
+      <figure class="row-fig" data-slot="사진넣기/대회_01_GXG2026" data-m="fig:사진넣기/대회_01_GXG2026" style="--w:360px">
+        <img src="img/사진넣기_대회_01_GXG2026.jpg" alt="GXG2026 Gamesound AI Competition · Gold Prize" loading="lazy" draggable="false">
+        <figcaption data-k="extra.0.imageCredit"></figcaption>
+      </figure>
+      <div class="row-txt" data-m="box:extra.0">
+        <h3 data-k="extra.0.title">GXG2026 Gamesound AI Competition · Gold Prize</h3>
+        <p class="sub" data-k="extra.0.sub">Hosted by Changjo Gongjakso · 2026.09</p>
+        <ul class="lines" data-k="extra.0.lines"><li data-k="extra.0.lines.0">I put together the Overtake team and split the roles into SFX, BGM and VOICE. I led SFX and VOICE and coordinated the schedule and direction for two weeks. We won the final after the main round.</li></ul>
+        
+      </div>
+    </article>
+    <article class="row">
+      <div class="row-fig row-sl" data-m="fig:사진넣기/대회_02_GMTK2026" style="--w:360px"><div class="sl" data-sl="extra1" data-slots="[&quot;사진넣기/대회_02_GMTK2026_플레이1&quot;,&quot;사진넣기/대회_02_GMTK2026_플레이2&quot;,&quot;사진넣기/대회_02_GMTK2026_플레이3&quot;]">
+        <div class="sl-track" tabindex="0" aria-label="사진 넘겨 보기 · 좌우 화살표 키">
+          <figure class="sl-item" data-slot="사진넣기/대회_02_GMTK2026_플레이1"><img src="img/사진넣기_대회_02_GMTK2026_플레이1.jpg" alt="GMTK Game Jam 2026 · Flamageddon" loading="eager" draggable="false"></figure>
+          <figure class="sl-item" data-slot="사진넣기/대회_02_GMTK2026_플레이2"><img src="img/사진넣기_대회_02_GMTK2026_플레이2.jpg" alt="GMTK Game Jam 2026 · Flamageddon" loading="lazy" draggable="false"></figure>
+          <figure class="sl-item" data-slot="사진넣기/대회_02_GMTK2026_플레이3"><img src="img/사진넣기_대회_02_GMTK2026_플레이3.jpg" alt="GMTK Game Jam 2026 · Flamageddon" loading="lazy" draggable="false"></figure>
+        </div>
+        <div class="sl-bar"><button type="button" class="sl-prev" aria-label="이전 사진">←</button><span class="sl-n"><b>1</b> / 3</span><span class="sl-line"><i style="width:33.333333333333336%"></i></span><button type="button" class="sl-next" aria-label="다음 사진">→</button></div>
+      </div></div>
+      <div class="row-txt" data-m="box:extra.1">
+        <h3 data-k="extra.1.title">GMTK Game Jam 2026 · Flamageddon</h3>
+        <p class="sub" data-k="extra.1.sub">5-person team (Design 1 · Dev 2 · Sound 1 · Art 1) · Unity · 5 days</p>
+        <ul class="lines" data-k="extra.1.lines"><li data-k="extra.1.lines.0">I made the game with my team in 5 days and handled the SFX and BGM. In the planning meeting I proposed the car racing concept, and it became the core of the game. We placed in the top 8.9% of all entries.</li></ul>
+        <p class="ext play" data-m="link:extra.1"><a class="play-btn" href="https://alegruz.itch.io/flamageddon" target="_blank" rel="noopener"><span class="play-ic" aria-hidden="true">▶</span><span class="play-txt"><span data-k="extra.1.link.0">Play it on itch.io</span><span class="play-sub" data-k="labels.playSub">Runs in the browser, no install · opens in a new tab</span></span><span class="play-go" aria-hidden="true">↗</span></a></p>
+      </div>
+    </article></div>
+  </div></section>
+
+  <section id="programs"><div class="wrap">
+    <div class="sec-h"><h2><span data-k="labels.programs">Tools I Built</span></h2><p class="note"><span data-k="labels.programsNote">I built my own tools to fix what bothered me while working. Screens only.</span></p></div>
+    <div class="free-photos" data-sec="programs"></div>
+    
+    <div class="pgm">
+      <div class="pgm-sl" data-m="gal:programs"><div class="sl" data-sl="programs" data-slots="[&quot;사진넣기/프로그램_SoundDeck_1&quot;,&quot;사진넣기/프로그램_SoundDeck_2&quot;,&quot;사진넣기/프로그램_SoundDeck_3&quot;,&quot;사진넣기/프로그램_작업대_1&quot;,&quot;사진넣기/프로그램_작업대_2&quot;,&quot;사진넣기/프로그램_StepForge_1&quot;,&quot;사진넣기/프로그램_StepForge_2&quot;,&quot;사진넣기/프로그램_크리처_1&quot;,&quot;사진넣기/프로그램_크리처_2&quot;,&quot;사진넣기/프로그램_TubeVault_1&quot;,&quot;사진넣기/프로그램_TubeVault_2&quot;]">
+        <div class="sl-track" tabindex="0" aria-label="사진 넘겨 보기 · 좌우 화살표 키">
+          <figure class="sl-item" data-slot="사진넣기/프로그램_SoundDeck_1" data-g="0"><img src="img/사진넣기_프로그램_SoundDeck_1.jpg" alt="SoundDeck" loading="eager" draggable="false"><figcaption><b>SoundDeck</b><span data-k="programs.0.shots.0.caption">Library search · finds &quot;footstep gravel&quot; with its synonyms across the whole library and plays the waveform right away</span></figcaption></figure>
+          <figure class="sl-item" data-slot="사진넣기/프로그램_SoundDeck_2" data-g="0"><img src="img/사진넣기_프로그램_SoundDeck_2.jpg" alt="SoundDeck" loading="lazy" draggable="false"><figcaption><b>SoundDeck</b><span data-k="programs.0.shots.1.caption">Footstep builder inside SoundDeck · builds steps from body type, gait, speed, stride and weight</span></figcaption></figure>
+          <figure class="sl-item" data-slot="사진넣기/프로그램_작업대_1" data-g="1"><img src="img/사진넣기_프로그램_작업대_1.jpg" alt="Rename &amp; Sort Workbench" loading="lazy" draggable="false"><figcaption><b>Rename &amp; Sort Workbench</b><span data-k="programs.1.shots.0.caption">Rename workbench · fixes names by rule while I listen, and shows the new names first</span></figcaption></figure>
+          <figure class="sl-item" data-slot="사진넣기/프로그램_작업대_2" data-g="1"><img src="img/사진넣기_프로그램_작업대_2.jpg" alt="Rename &amp; Sort Workbench" loading="lazy" draggable="false"><figcaption><b>Rename &amp; Sort Workbench</b><span data-k="programs.1.shots.1.caption">Folder sort workbench · builds folder suggestions from common words and previews where files will go</span></figcaption></figure>
+          <figure class="sl-item" data-slot="사진넣기/프로그램_StepForge_1" data-g="2"><img src="img/사진넣기_프로그램_StepForge_1.jpg" alt="StepForge" loading="lazy" draggable="false"><figcaption><b>StepForge</b><span data-k="programs.2.shots.0.caption">Samples · load a single foot contact and line up the contact point</span></figcaption></figure>
+          <figure class="sl-item" data-slot="사진넣기/프로그램_StepForge_2" data-g="2"><img src="img/사진넣기_프로그램_StepForge_2.jpg" alt="StepForge" loading="lazy" draggable="false"><figcaption><b>StepForge</b><span data-k="programs.2.shots.1.caption">Preview · left and right contacts show on the waveform, then export straight to WAV</span></figcaption></figure>
+          <figure class="sl-item" data-slot="사진넣기/프로그램_크리처_1" data-g="3"><img src="img/사진넣기_프로그램_크리처_1.jpg" alt="Creature Sound Builder" loading="lazy" draggable="false"><figcaption><b>Creature Sound Builder</b><span data-k="programs.3.shots.0.caption">Layering · stacks breaths, growls and roars into sets for idle, attack and hit</span></figcaption></figure>
+          <figure class="sl-item" data-slot="사진넣기/프로그램_TubeVault_1" data-g="4"><img src="img/사진넣기_프로그램_TubeVault_1.jpg" alt="TubeVault" loading="lazy" draggable="false"><figcaption><b>TubeVault</b><span data-k="programs.4.shots.0.caption">Player · Korean and English subtitles together, and the subtitle panel follows playback</span></figcaption></figure>
+          <figure class="sl-item" data-slot="사진넣기/프로그램_TubeVault_2" data-g="4"><img src="img/사진넣기_프로그램_TubeVault_2.jpg" alt="TubeVault" loading="lazy" draggable="false"><figcaption><b>TubeVault</b><span data-k="programs.4.shots.1.caption">A list of 50 lectures by overseas sound designers saved on my disk</span></figcaption></figure>
+        </div>
+        <div class="sl-bar"><button type="button" class="sl-prev" aria-label="이전 사진">←</button><span class="sl-n"><b>1</b> / 9</span><span class="sl-line"><i style="width:11.11111111111111%"></i></span><button type="button" class="sl-next" aria-label="다음 사진">→</button></div>
+      </div></div>
+      <div class="pgm-txt">
+        <div class="pgm-col" data-m="box:programsList">
+          <h3 data-k="labels.pgmList">What I built</h3>
+          <ol class="pgm-list">
+            <li data-g="0" data-to="0"><span class="pgm-no">01</span><span class="pgm-name" data-k="programs.0.name">SoundDeck</span><span class="pgm-one" data-k="programs.0.one">My own sound library app, built to replace Soundly</span></li>
+            <li data-g="1" data-to="2"><span class="pgm-no">02</span><span class="pgm-name" data-k="programs.1.name">Rename &amp; Sort Workbench</span><span class="pgm-one" data-k="programs.1.one">Organizes large numbers of sound files while I listen (inside SoundDeck)</span></li>
+            <li data-g="2" data-to="4"><span class="pgm-no">03</span><span class="pgm-name" data-k="programs.2.name">StepForge</span><span class="pgm-one" data-k="programs.2.one">Turns a few footstep samples into human, beast or monster steps that follow the gait</span></li>
+            <li data-g="3" data-to="6"><span class="pgm-no">04</span><span class="pgm-name" data-k="programs.3.name">Creature Sound Builder</span><span class="pgm-one" data-k="programs.3.one">Builds creature sounds by layering sources (inside SoundDeck)</span></li>
+            <li data-g="4" data-to="7"><span class="pgm-no">05</span><span class="pgm-name" data-k="programs.4.name">TubeVault</span><span class="pgm-one" data-k="programs.4.one">A study app that keeps YouTube videos with subtitles, descriptions and summaries</span></li>
+          </ol>
+        </div>
+        <div class="pgm-col" data-m="box:programsText">
+          <h3 data-k="labels.pgmHow">What I learned building them with AI</h3>
+          <p class="pgm-p" data-k="programsText.0">All five started from a real point where my work got stuck. I&#39;m not a developer, so I decide what is inconvenient and how it should work, and I write the code together with AI (Claude). When I find something to fix while using them, I fix it right away.</p><p class="pgm-p" data-k="programsText.1">Building them made me put into words what I used to do by feel: where a footstep lands, how creature layers stack, how a library should be named. Because of that, I got better at breaking work into steps, managing many files without mistakes and learning new tools quickly.</p>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="notes"><div class="wrap">
+    <div class="sec-h"><h2><span data-k="labels.notes">Study Notes</span></h2><p class="note"><span data-k="labels.notesHead">39 chapters on game audio, voice and audio theory.</span> <span data-k="notes.note">Chapters from the study notes app I built myself (the notes are written in Korean).</span></p></div>
+    <div class="free-photos" data-sec="notes"></div>
+    
+    <div class="nwhy" data-m="box:notesWhy">
+      <p class="nwhy-mark" data-k="labels.notesWhy">Why?</p>
+      <div class="nwhy-text" data-k="notes.why"><p data-k="notes.why.0">When I find something I&#39;m missing, I don&#39;t just move on. I study why first, because I want to show a little more progress in my next piece of work.</p><p data-k="notes.why.1">So I organize what I study, chapter by chapter, in a study notes app I built myself. Below you can see real note screens and the chapters I have written so far.</p></div>
+    </div>
+    <div class="ntabs" role="tablist" aria-label="학습노트 갈래"><button type="button" class="ntab on" role="tab" aria-selected="true" data-tab="shots"><span data-k="labels.noteShotsTab">Note screens</span></button></div>
+    
+      <div class="npanel" role="tabpanel" data-panel="shots"><div class="nshots">
+      <div class="gal" data-gal="n" data-slots="[&quot;사진넣기/학습노트_1&quot;,&quot;사진넣기/학습노트_2&quot;,&quot;사진넣기/학습노트_3&quot;,&quot;사진넣기/학습노트_4&quot;]" data-m="gal:n">
+        <figure class="gal-main"><img src="img/사진넣기_학습노트_1.jpg" alt="Ch. 18 Voice Recording Direction · what a director does, by role, content and judgment (chapter contents on the right)" draggable="false"><figcaption>Ch. 18 Voice Recording Direction · what a director does, by role, content and judgment (chapter contents on the right)</figcaption></figure>
+        <div class="gal-thumbs"><button type="button" class="on" data-src="img/사진넣기_학습노트_1.jpg" data-cap="Ch. 18 Voice Recording Direction · what a director does, by role, content and judgment (chapter contents on the right)" aria-label="Ch. 18 Voice Recording Direction · what a director does, by role, content and judgment (chapter contents on the right)"><img src="img/사진넣기_학습노트_1.jpg" alt="" loading="lazy" draggable="false"></button><button type="button" class="" data-src="img/사진넣기_학습노트_2.jpg" data-cap="Ch. 19 Voice Engineering · a dialogue problem guide (symptom · cause · fix)" aria-label="Ch. 19 Voice Engineering · a dialogue problem guide (symptom · cause · fix)"><img src="img/사진넣기_학습노트_2.jpg" alt="" loading="lazy" draggable="false"></button><button type="button" class="" data-src="img/사진넣기_학습노트_3.jpg" data-cap="Ch. 28 iZotope RX · from how RX differs from regular EQ and compression to modules, order of work and shortcuts" aria-label="Ch. 28 iZotope RX · from how RX differs from regular EQ and compression to modules, order of work and shortcuts"><img src="img/사진넣기_학습노트_3.jpg" alt="" loading="lazy" draggable="false"></button><button type="button" class="" data-src="img/사진넣기_학습노트_4.jpg" data-cap="Ch. 21 Running a Studio Session · roles and flow in a recording session" aria-label="Ch. 21 Running a Studio Session · roles and flow in a recording session"><img src="img/사진넣기_학습노트_4.jpg" alt="" loading="lazy" draggable="false"></button></div>
+      </div></div>
+      </div>
+  </div></section>
+
+  <section id="contact"><div class="wrap">
+    <div class="sec-h"><h2><span data-k="labels.contact">Contact</span></h2></div>
+    <div class="free-photos" data-sec="contact"></div>
+    <dl class="contact">
+      <dt><span data-k="labels.contactEmail">Email</span></dt><dd><span class="sel" id="mail" data-k="profile.email">bluepop98@naver.com</span><button type="button" class="copy" id="copyMail">Copy</button></dd>
+      <dt><span data-k="labels.contactYoutube">YouTube</span></dt><dd><a href="https://www.youtube.com/@%EA%B9%80%EA%B7%9C%ED%97%8C%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4" target="_blank" rel="noopener"><span data-k="labels.youtubeText">Gyu Hun Kim portfolio channel</span> ↗</a></dd>
+    </dl>
+  </div></section>
+</main>
+
+  <article class="plan" id="plan-tlou2" hidden><div class="wrap">
+    <p class="back"><a href="#videos"><span data-k="labels.planBack">← Back to portfolio</span></a></p>
+    <header class="plan-h" data-m="head:plans.0">
+      <p class="kind" data-k="plans.0.kind">Sound design document</p>
+      <h1 data-k="plans.0.title">The Last of Us Part II · Sound Design Document</h1>
+      <p class="sub" data-k="plans.0.sub">Foley recording · distance-based breathing trigger · voice direction for Ellie</p>
+      <p class="plan-play"><button type="button" class="cue" data-vi="0" data-t="0"><span data-k="labels.planPlay">▶ Watch this video</span></button></p>
+    </header>
+    <div class="plan-body" data-m="box:plans.0"><div class="pb pb-h2" data-pb="0.0"><h2 data-k="plans.0.blocks.0.text">Project</h2></div>
+<div class="pb pb-ul" data-pb="0.1"><ul class="lines" data-k="plans.0.blocks.1.items"><li data-k="plans.0.blocks.1.items.0">Game sound design built around my own Foley recordings</li><li data-k="plans.0.blocks.1.items.1">Immersion that feels like real gameplay</li></ul></div>
+<div class="pb pb-h2" data-pb="0.2"><h2 data-k="plans.0.blocks.2.text">Situation</h2></div>
+<div class="pb pb-p" data-pb="0.3"><p class="pp" data-k="plans.0.blocks.3.text">Ellie escapes from enemies and starts fighting back inside a building.</p></div>
+<div class="pb pb-ul" data-pb="0.4"><ul class="lines" data-k="plans.0.blocks.4.items"><li data-k="plans.0.blocks.4.items.0">Flow: stealth → chase → melee</li><li data-k="plans.0.blocks.4.items.1">A fight for survival against attacking enemies</li></ul></div>
+<div class="pb pb-h2" data-pb="0.5"><h2 data-k="plans.0.blocks.5.text">Ambience (AMB)</h2></div>
+<div class="pb pb-h3" data-pb="0.6"><h3 data-k="plans.0.blocks.6.text">Outside</h3></div>
+<div class="pb pb-dl" data-pb="0.7"><dl class="pdl"><dt data-k="plans.0.blocks.7.rows.0.0">Weather</dt><dd data-k="plans.0.blocks.7.rows.0.1">Foggy dawn turning into morning</dd><dt data-k="plans.0.blocks.7.rows.1.0">Tone</dt><dd data-k="plans.0.blocks.7.rows.1.1">Cold, damp air and limited sight</dd></dl></div>
+<div class="pb pb-h3" data-pb="0.8"><h3 data-k="plans.0.blocks.8.text">Inside</h3></div>
+<div class="pb pb-dl" data-pb="0.9"><dl class="pdl"><dt data-k="plans.0.blocks.9.rows.0.0">Space</dt><dd data-k="plans.0.blocks.9.rows.0.1">A reverberant building interior</dd><dt data-k="plans.0.blocks.9.rows.1.0">Mood keywords</dt><dd data-k="plans.0.blocks.9.rows.1.1">Horror / Cinematic / Scary</dd></dl></div>
+<div class="pb pb-quote" data-pb="0.10"><blockquote data-k="plans.0.blocks.10.text">I used the room&#39;s reverb and low-frequency ambience so the tension never easily resolves.</blockquote></div>
+<div class="pb pb-p" data-pb="0.11"><p class="pp" data-k="plans.0.blocks.11.text">To build tension and heavy air, I shaped the mood with Foley sounds.</p></div>
+<div class="pb pb-ul" data-pb="0.12"><ul class="lines" data-k="plans.0.blocks.12.items"><li data-k="plans.0.blocks.12.items.0">Wind through a danso (Korean bamboo flute)</li><li data-k="plans.0.blocks.12.items.1">Air escaping from a balloon</li><li data-k="plans.0.blocks.12.items.2">Scratches on guitar strings</li></ul></div>
+<div class="pb pb-h2" data-pb="0.13"><h2 data-k="plans.0.blocks.13.text">Character sound</h2></div>
+<div class="pb pb-h3" data-pb="0.14"><h3 data-k="plans.0.blocks.14.text">Ellie</h3></div>
+<div class="pb pb-dl" data-pb="0.15"><dl class="pdl"><dt data-k="plans.0.blocks.15.rows.0.0">Personality</dt><dd data-k="plans.0.blocks.15.rows.0.1">Bold and brave</dd><dt data-k="plans.0.blocks.15.rows.1.0">Voice</dt><dd data-k="plans.0.blocks.15.rows.1.1">Female, 17 to 19 / mid-range / anger mixed with tension</dd><dt data-k="plans.0.blocks.15.rows.2.0">Foley</dt><dd data-k="plans.0.blocks.15.rows.2.1">Backpack, shirt, jeans, regular sneakers</dd><dt data-k="plans.0.blocks.15.rows.3.0">Weapons</dt><dd data-k="plans.0.blocks.15.rows.3.1">Bow &amp; arrows (normal / explosive), machete</dd></dl></div>
+<div class="pb pb-h3" data-pb="0.16"><h3 data-k="plans.0.blocks.16.text">Enemies</h3></div>
+<div class="pb pb-dl" data-pb="0.17"><dl class="pdl"><dt data-k="plans.0.blocks.17.rows.0.0">Types</dt><dd data-k="plans.0.blocks.17.rows.0.1">Female / strong male / thick, powerful male voice</dd><dt data-k="plans.0.blocks.17.rows.1.0">Foley</dt><dd data-k="plans.0.blocks.17.rows.1.1">Jacket, rain suit, bag, shotgun Foley</dd><dt data-k="plans.0.blocks.17.rows.2.0">Weapons</dt><dd data-k="plans.0.blocks.17.rows.2.1">Bow &amp; arrows, hammer (heavy weapon)</dd></dl></div>
+<div class="pb pb-h2" data-pb="0.18"><h2 data-k="plans.0.blocks.18.text">UI sound concept</h2></div>
+<div class="pb pb-p" data-pb="0.19"><p class="pp" data-k="plans.0.blocks.19.text">Instead of traditional UI sounds, the UI uses the real movement of objects.</p></div>
+<div class="pb pb-dl" data-pb="0.20"><dl class="pdl"><dt data-k="plans.0.blocks.20.rows.0.0">Objects</dt><dd data-k="plans.0.blocks.20.rows.0.1">Gear / can / trash / Foley objects</dd></dl></div>
+<div class="pb pb-h3" data-pb="0.21"><h3 data-k="plans.0.blocks.21.text">Crafting UI sketch</h3></div>
+<div class="pb pb-ul" data-pb="0.22"><ul class="lines" data-k="plans.0.blocks.22.items"><li data-k="plans.0.blocks.22.items.0">Changing a light bulb</li><li data-k="plans.0.blocks.22.items.1">Wrapping something in cloth</li><li data-k="plans.0.blocks.22.items.2">A low-pitched can moving</li><li data-k="plans.0.blocks.22.items.3">Twigs rubbing together</li></ul></div>
+<div class="pb pb-quote" data-pb="0.23"><blockquote data-k="plans.0.blocks.23.text">By combining real objects, I made crafting feel tactile, as if you could hold it in your hands.</blockquote></div>
+<div class="pb pb-h2" data-pb="0.24"><h2 data-k="plans.0.blocks.24.text">Distance-based trigger system</h2></div>
+<div class="pb pb-p" data-pb="0.25"><p class="pp" data-k="plans.0.blocks.25.text">Ellie&#39;s breathing changes step by step as the distance to the enemy changes.</p></div>
+<div class="pb pb-ul" data-pb="0.26"><ul class="lines" data-k="plans.0.blocks.26.items"><li data-k="plans.0.blocks.26.items.0">Danger reads without a visual HUD</li><li data-k="plans.0.blocks.26.items.1">It works directly on the player&#39;s state of mind</li></ul></div>
+<div class="pb pb-img" data-pb="0.27"><figure class="pfig" data-slot="사진넣기/기획서_TLOU2_거리트리거" data-m="fig:사진넣기/기획서_TLOU2_거리트리거" style="--w:960px"><img src="img/사진넣기_기획서_TLOU2_거리트리거.jpg" alt="Breathing trigger stages by distance from the enemy" loading="lazy" draggable="false"><figcaption data-k="plans.0.blocks.27.caption">Breathing trigger stages by distance from the enemy</figcaption></figure></div>
+<div class="pb pb-dl" data-pb="0.28"><dl class="pdl"><dt data-k="plans.0.blocks.28.rows.0.0">5 m or more</dt><dd data-k="plans.0.blocks.28.rows.0.1">No breathing · a relatively safe zone</dd><dt data-k="plans.0.blocks.28.rows.1.0">2 to 3 m</dt><dd data-k="plans.0.blocks.28.rows.1.1">Light, short breaths · on guard</dd><dt data-k="plans.0.blocks.28.rows.2.0">Within 1 m</dt><dd data-k="plans.0.blocks.28.rows.2.1">Rough, heavy breathing · extreme pressure right before being spotted</dd></dl></div>
+<div class="pb pb-quote" data-pb="0.29"><blockquote data-k="plans.0.blocks.29.text">Within 1 m especially, I made the breathing deliberately rough to say &quot;if you move now, you&#39;ll be caught&quot; through sound.</blockquote></div>
+<div class="pb pb-h2" data-pb="0.30"><h2 data-k="plans.0.blocks.30.text">Sound palette (recorder: PCM-A10)</h2></div>
+<div class="pb pb-h3" data-pb="0.31"><h3 data-k="plans.0.blocks.31.text">Bow loading &amp; arrow</h3></div>
+<div class="pb pb-ul" data-pb="0.32"><ul class="lines" data-k="plans.0.blocks.32.items"><li data-k="plans.0.blocks.32.items.0">Twisting a paper-wrapped wooden chopstick for bowstring tension</li><li data-k="plans.0.blocks.32.items.1">Rubbing processed chopsticks together for the draw</li></ul></div>
+<div class="pb pb-h3" data-pb="0.33"><h3 data-k="plans.0.blocks.33.text">Footsteps on grass</h3></div>
+<div class="pb pb-ul" data-pb="0.34"><ul class="lines" data-k="plans.0.blocks.34.items"><li data-k="plans.0.blocks.34.items.0">Coins in a bag for the texture of stepping on grass</li><li data-k="plans.0.blocks.34.items.1">EQ cut from 1k to 20k to remove the metallic tone</li><li data-k="plans.0.blocks.34.items.2">Pitch -1 and reverb to match the picture</li></ul></div>
+<div class="pb pb-h2" data-pb="0.35"><h2 data-k="plans.0.blocks.35.text">Voice direction for Ellie</h2></div>
+<div class="pb pb-h3" data-pb="0.36"><h3 data-k="plans.0.blocks.36.text">Why I cast a voice actor myself</h3></div>
+<div class="pb pb-p" data-pb="0.37"><p class="pp" data-k="plans.0.blocks.37.text">The main goal was to give her real character and the strongest possible immersion.</p></div>
+<div class="pb pb-p" data-pb="0.38"><p class="pp" data-k="plans.0.blocks.38.text">In The Last of Us Part II especially, I tried to build tension through her breathing, small sounds of presence and lines.</p></div>
+<div class="pb pb-h3" data-pb="0.39"><h3 data-k="plans.0.blocks.39.text">Casting brief</h3></div>
+<div class="pb pb-dl" data-pb="0.40"><dl class="pdl"><dt data-k="plans.0.blocks.40.rows.0.0">Age</dt><dd data-k="plans.0.blocks.40.rows.0.1">Around 17 to 19</dd><dt data-k="plans.0.blocks.40.rows.1.0">Gender</dt><dd data-k="plans.0.blocks.40.rows.1.1">Female</dd></dl></div>
+<div class="pb pb-ul" data-pb="0.41"><ul class="lines" data-k="plans.0.blocks.41.items"><li data-k="plans.0.blocks.41.items.0">A rough, fighter-like character</li><li data-k="plans.0.blocks.41.items.1">Injured and moving secretly out of the enemies&#39; sight</li><li data-k="plans.0.blocks.41.items.2">Under extreme tension and stress</li><li data-k="plans.0.blocks.41.items.3">Whispering quietly outside of combat, and a strong, intense voice for rough movement in combat</li></ul></div>
+<div class="pb pb-h3" data-pb="0.42"><h3 data-k="plans.0.blocks.42.text">Breathing trigger</h3></div>
+<div class="pb pb-p" data-pb="0.43"><p class="pp" data-k="plans.0.blocks.43.text">The closer she gets to the enemy, the rougher her breathing. While moving, I also added breathing now and then. (The distance stages are the same as the trigger system above.)</p></div>
+<div class="pb pb-h3" data-pb="0.44"><h3 data-k="plans.0.blocks.44.text">Direction by scene</h3></div>
+<div class="pb pb-p" data-pb="0.45"><p class="pp" data-k="plans.0.blocks.45.text">This is the direction I gave the voice actor for each scene. I left room for her to adjust it in a similar feel. Click a time to play the video from that moment.</p></div>
+<div class="pb pb-cues" data-pb="0.46"><ol class="cues"><li><button type="button" class="cue" data-vi="0" data-t="0" aria-label="0:00 – 0:07 장면 재생"><span data-k="plans.0.blocks.46.rows.0.0">0:00 – 0:07</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.0.1">Pulling out an embedded arrow. The pain builds right up to the pull (rising groan… then a sharp gasp!) → after the pull, about 2 seconds of rough breathing with the pain still there</span></li><li><button type="button" class="cue" data-vi="0" data-t="36" aria-label="0:36 – 0:40 장면 재생"><span data-k="plans.0.blocks.46.rows.1.0">0:36 – 0:40</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.1.1">&quot;I have to be careful not to get caught…&quot; (in a careful voice)</span></li><li><button type="button" class="cue" data-vi="0" data-t="46" aria-label="0:46 – 0:48 장면 재생"><span data-k="plans.0.blocks.46.rows.2.0">0:46 – 0:48</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.2.1">Straining to pull out an arrow, with the mouth closed: hnn… ha!</span></li><li><button type="button" class="cue" data-vi="0" data-t="50" aria-label="0:50 장면 재생"><span data-k="plans.0.blocks.46.rows.3.0">0:50</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.3.1">&quot;This should do it…&quot;</span></li><li><button type="button" class="cue" data-vi="0" data-t="58" aria-label="0:58 장면 재생"><span data-k="plans.0.blocks.46.rows.4.0">0:58</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.4.1">&quot;Damn it…&quot;</span></li><li><button type="button" class="cue" data-vi="0" data-t="71" aria-label="1:11 장면 재생"><span data-k="plans.0.blocks.46.rows.5.0">1:11</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.5.1">Catching her breath and setting off: a big breath in through the nose, then a short &quot;hoo!&quot; out as the fight begins</span></li><li><button type="button" class="cue" data-vi="0" data-t="76" aria-label="1:16 – 1:18 장면 재생"><span data-k="plans.0.blocks.46.rows.6.0">1:16 – 1:18</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.6.1">Rough breathing while running, and a furious &quot;hraah!!&quot; when bringing the blade down</span></li><li><button type="button" class="cue" data-vi="0" data-t="81" aria-label="1:21 장면 재생"><span data-k="plans.0.blocks.46.rows.7.0">1:21</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.7.1">A startled voice while dodging</span></li><li><button type="button" class="cue" data-vi="0" data-t="82" aria-label="1:22 – 1:25 장면 재생"><span data-k="plans.0.blocks.46.rows.8.0">1:22 – 1:25</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.8.1">Ellie&#39;s attack voices: hit 1 &quot;ha!&quot; / hit 2 a little softer &quot;hh..!&quot; / hit 3 straining as the weapons clash and scrape &quot;nnngh…!!&quot;</span></li><li><button type="button" class="cue" data-vi="0" data-t="85" aria-label="1:25 장면 재생"><span data-k="plans.0.blocks.46.rows.9.0">1:25</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.9.1">Being choked: &quot;khh!&quot;</span></li><li><button type="button" class="cue" data-vi="0" data-t="87" aria-label="1:27 장면 재생"><span data-k="plans.0.blocks.46.rows.10.0">1:27</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.10.1">&quot;Khh…!&quot; Groaning when thrown to the floor (1:25 to 1:30 like the reference voice, or even bigger)</span></li><li><button type="button" class="cue" data-vi="0" data-t="90" aria-label="1:30 장면 재생"><span data-k="plans.0.blocks.46.rows.11.0">1:30</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.11.1">A surprised voice, like a sharp inhale: &quot;huh!&quot;</span></li><li><button type="button" class="cue" data-vi="0" data-t="90" aria-label="1:30 – 1:36 장면 재생"><span data-k="plans.0.blocks.46.rows.12.0">1:30 – 1:36</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.12.1">Running: moving with rough breathing</span></li><li><button type="button" class="cue" data-vi="0" data-t="97" aria-label="1:37 장면 재생"><span data-k="plans.0.blocks.46.rows.13.0">1:37</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.13.1">Teeth clenched, &quot;nngh!! aah!&quot; for the movement → at 1:39, striking the enemy: &quot;Die!!!&quot;</span></li><li><button type="button" class="cue" data-vi="0" data-t="100" aria-label="1:40 장면 재생"><span data-k="plans.0.blocks.46.rows.14.0">1:40</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.14.1">Picking up arrows: rough, exhausted breathing</span></li><li><button type="button" class="cue" data-vi="0" data-t="102" aria-label="1:42 장면 재생"><span data-k="plans.0.blocks.46.rows.15.0">1:42</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.15.1">Getting hit: &quot;ugh…!&quot; in pain</span></li><li><button type="button" class="cue" data-vi="0" data-t="105" aria-label="1:45 – 1:50 장면 재생"><span data-k="plans.0.blocks.46.rows.16.0">1:45 – 1:50</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.16.1">Three bow shots, emotion rising each time: shot 1 &quot;Die..!&quot; / shot 2 &quot;Please…&quot; / shot 3 &quot;I said die!&quot; (fully peaked) → then walking on, breathing out, exhausted</span></li><li><button type="button" class="cue" data-vi="0" data-t="119" aria-label="1:59 장면 재생"><span data-k="plans.0.blocks.46.rows.17.0">1:59</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.17.1">About to strike the enemy, full of anger: &quot;Shut up!!&quot;</span></li><li><button type="button" class="cue" data-vi="0" data-t="131" aria-label="2:11 장면 재생"><span data-k="plans.0.blocks.46.rows.18.0">2:11</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.18.1">Bringing the blade down: &quot;hraah!!&quot;</span></li><li><button type="button" class="cue" data-vi="0" data-t="132" aria-label="2:12 from 장면 재생"><span data-k="plans.0.blocks.46.rows.19.0">2:12 from</span></button><span class="cue-d" data-k="plans.0.blocks.46.rows.19.1">Until the outro: panicked breathing with a slight cold shiver</span></li></ol></div>
+<div class="pb pb-h2" data-pb="0.47"><h2 data-k="plans.0.blocks.47.text">Design intent</h2></div>
+<div class="pb pb-ul" data-pb="0.48"><ul class="lines" data-k="plans.0.blocks.48.items"><li data-k="plans.0.blocks.48.items.0">This sound design uses sound both to carry information and to work on the player&#39;s mind.</li><li data-k="plans.0.blocks.48.items.1">With distance-based breathing, Foley from real objects and an ambience that keeps the sense of space, the player can feel the situation without even looking at the screen.</li></ul></div>
+<div class="pb pb-h2" data-pb="0.49"><h2 data-k="plans.0.blocks.49.text">Closing</h2></div>
+<div class="pb pb-p" data-pb="0.50"><p class="pp" data-k="plans.0.blocks.50.text">In the end, the goal of this project was to bring the urgent, overwhelming combat of the original to life through sound, while approaching it like a film scene built around voice and sound.</p></div>
+<div class="pb pb-p" data-pb="0.51"><p class="pp" data-k="plans.0.blocks.51.text">I aimed to blur the line between game and film by combining real gameplay sound with cinematic voice direction. The key was to make the viewer feel like they were playing the game, not just watching a scene.</p></div>
+<div class="pb pb-p" data-pb="0.52"><p class="pp" data-k="plans.0.blocks.52.text">This piece shows how I see sound: as part of the game system and as a storytelling tool. Thank you for listening.</p></div></div>
+    <p class="back end"><a href="#videos"><span data-k="labels.planBack">← Back to portfolio</span></a></p>
+  </div></article>
+<footer><div class="wrap"><span data-k="labels.copyright">© 2026 Gyu Hun Kim.</span> <span data-k="labels.footer">Please do not copy or redistribute the videos, images or text on this page.</span></div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.8/dist/hls.min.js"></script>
+<script>
+(function () {
+  var VIDS = [{"id":"qJQO0FiphRs","si":0,"title":"The Last of Us Part II","kind":"Trailer (gameplay edit) · Sound Redesign","meta":[["Developer · Publisher","Naughty Dog · Sony Interactive Entertainment"],["Genre","Action adventure · Survival horror"],["My role","Voice directing (Ellie), Foley recording, sound design, mix & master"],["DAW","Cubase 13"]],"points":["Voice: I cast and directed a voice actor for Ellie myself. I set the brief (around 17 to 19, mid-range voice, anger mixed with tension) and wrote direction for every moment, from pulling out an arrow to whispered lines while sneaking.","Foley: I recorded my own Foley with a PCM-A10 and built the SFX from it. A paper-wrapped wooden chopstick twisted for bowstring tension, coins in a bag for steps on grass. The UI also comes from real objects: a light bulb, cloth, a can.","Scripted vs. gameplay: in scripted moments, like pulling out the arrow or a short line, the voice and sound follow the edit like a cutscene with clear emotional peaks. In gameplay moments, sound works like the game itself: Ellie's breathing changes with enemy distance (none beyond 5 m, light at 2 to 3 m, rough within 1 m), so danger reads without any HUD.","Ambience: a danso's wind, a balloon losing air and guitar string scratches, under the reverb of the building, so the tension never fully resolves."],"links":[["Sound design document · Voice direction","#plan-tlou2"]],"chapters":[[0,"0:00","Stealth · watching enemies inside the store","0:27"],[43,"0:43","Stealth kill · close Foley","0:50"],[65,"1:05","Crafting screen · UI sound","1:09"],[72,"1:12","Spotted · melee fight","1:27"],[102,"1:42","Bow and melee attacks","1:57"],[118,"1:58","Final kill · Ellie's lines","2:16"]],"hls":"media/qJQO0FiphRs/hls/index.txt","fallback":"media/qJQO0FiphRs/fallback.mp4","poster":"img/사진넣기_영상_qJQO0FiphRs.jpg","duration":146,"height":1080},{"id":"kYxwDrfYFCw","si":1,"title":"ArcheAge War","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","XLGAMES · Kakao Games"],["Engine","Unreal Engine 4"],["Platform","PC & mobile"],["My role","Sound design, mix & master"],["DAW","Cubase 12"]],"points":["Epic style: I built the trailer on the traits of epic game sound. Bright, high-pitched sounds add fun, while the low end makes every scene feel grander.","Big moments: the wall explosion and the bridge explosion carry the climax, and the logo sound closes the trailer before a short post-credit scene."],"links":[],"chapters":[[0,"0:00","Intro","0:15"],[15,"0:15","Battlefield (castle view)","0:21"],[21,"0:21","Battlefield (outskirts)","0:30"],[30,"0:30","The battle begins","0:36"],[36,"0:36","Paladin fight","0:40"],[40,"0:40","Mage fight","0:47"],[47,"0:47","Hero scene","0:58"],[58,"0:58","Wall explosion","1:03"],[63,"1:03","Hero scene","1:10"],[70,"1:10","Bridge explosion & climax","1:25"],[85,"1:25","Logo sound","1:29"],[89,"1:29","Post-credit scene","1:38"]],"hls":"media/kYxwDrfYFCw/hls/index.txt","fallback":"media/kYxwDrfYFCw/fallback.mp4","poster":"img/사진넣기_영상_kYxwDrfYFCw.jpg","duration":98,"height":1080},{"id":"rc-eExao-ls","si":2,"title":"LORDNINE","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","NX3 Games · Smilegate"],["Genre","MMORPG"],["Engine","Unity"],["My role","Sound design, mix & master"],["DAW","Cubase 13"]],"points":["Build-up: risers carry the tension through the rising part of the trailer and make the viewer expect the next shot.","Scale: for the army gathering, I used sub-bass sources and Scheps 73 to give the low end more weight and resonance, so the crowd feels heavy rather than just loud."],"links":[],"chapters":[],"hls":"media/rc-eExao-ls/hls/index.txt","fallback":"media/rc-eExao-ls/fallback.mp4","poster":"img/사진넣기_영상_rc-eExao-ls.jpg","duration":77,"height":1080},{"id":"4crZ2vKl_8o","si":3,"title":"Dungeon & Fighter: Overkill","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","Neople · Nexon"],["Engine","Unreal Engine 4"],["Genre","Action"],["Platform","PC · Android · iOS"],["My role","Sound design, mix & master"],["DAW","Cubase 13"]],"points":["Impact: the crisp, satisfying hit feel the original Dungeon & Fighter is known for was the main focus of the sound.","Character gear: mid-range sounds lead, to bring out the character of each piece of equipment.","Weight: low impacts make the frame feel grand and keep the sound solid on speakers, which makes each scene more fun."],"links":[],"chapters":[],"hls":"media/4crZ2vKl_8o/hls/index.txt","fallback":"media/4crZ2vKl_8o/fallback.mp4","poster":"img/사진넣기_영상_4crZ2vKl_8o.jpg","duration":68,"height":1080},{"id":"wBZLKIVBC8w","si":4,"title":"Back 4 Blood","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","Turtle Rock Studios · Warner Bros. Games"],["Engine","Unreal Engine 4"],["Platform","PC · PS5 · Xbox"],["My role","Voice directing (special zombies), sound design, mix & master"],["DAW","Cubase 13"]],"points":["Voice: I directed the voices of the special zombies myself so each one shows its own character.","Realism: guns, hits and Foley were made to sound grounded, and panned to sit in space like real recordings.","Tension: a low-end bed runs under the trailer so the tension holds while the viewer watches."],"links":[],"chapters":[],"hls":"media/wBZLKIVBC8w/hls/index.txt","fallback":"media/wBZLKIVBC8w/fallback.mp4","poster":"img/사진넣기_영상_wBZLKIVBC8w.jpg","duration":107,"height":1080},{"id":"06eVmlKTqvA","si":5,"title":"Dungeons & Dragons","kind":"Cinematic trailer · Sound Redesign","meta":[["Video","Unofficial cinematic"],["Genre","Fantasy action"],["My role","Sound design, character voice editing, mix & master"],["DAW","Cubase 13"]],"points":["Dragon: the dragon's fury is carried by mid and low frequencies to keep the battle tense, with comic moments placed in between to make it fun.","Voices: I searched library sources that suit each character and placed voices that fit each situation.","Foley: for the grand 3D visuals I paid close attention to Foley, and used panning so the sound feels more real."],"links":[],"chapters":[],"hls":"media/06eVmlKTqvA/hls/index.txt","fallback":"media/06eVmlKTqvA/fallback.mp4","poster":"img/사진넣기_영상_06eVmlKTqvA.jpg","duration":105,"height":1080}];
+  var V = document.getElementById('player'), state = document.getElementById('vstate'), info = document.getElementById('vinfo');
+  var hls = null, cur = -1, usingFallback = false, watchdog = null;
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function mmss(s) { return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+  // 영상 설명 칸의 제목 글 — site.json labels 에서 고칠 수 있음(편집 모드 data-k = labels.*)
+  var LBL = {"vCredit":"designed / mixed & mastered by Gyu Hun Kim","vPoints":"Sound design","vChapters":"Sections","vLinks":"See also","vYoutube":"Watch on YouTube"};
+  function lb(key, tag) { return '<' + tag + ' data-k="labels.' + key + '">' + esc(LBL[key]) + '</' + tag + '>'; }
+  function setState(q) { var v = VIDS[cur]; state.innerHTML = '<span><b>' + q + '</b></span><span>' + esc(v.kind) + ' · ' + mmss(v.duration) + '</span>' + lb('vCredit', 'span'); }
+  function fallback() {
+    if (usingFallback) return;
+    usingFallback = true;
+    var t = V.currentTime || 0, wasPlaying = !V.paused;
+    if (hls) { hls.destroy(); hls = null; }
+    V.src = VIDS[cur].fallback;
+    V.addEventListener('loadedmetadata', function once() { V.removeEventListener('loadedmetadata', once); if (t) V.currentTime = t; if (wasPlaying) V.play().catch(function () {}); });
+    setState('720p backup video');
+  }
+  function load(i, autoplay) {
+    if (i === cur) return;
+    cur = i; usingFallback = false; clearTimeout(watchdog);
+    var v = VIDS[i];
+    if (hls) { hls.destroy(); hls = null; }
+    V.removeAttribute('src'); V.load();
+    V.poster = v.poster;
+    if (window.Hls && window.Hls.isSupported()) {
+      hls = new window.Hls({ maxBufferLength: 20, capLevelToPlayerSize: false });
+      hls.on(window.Hls.Events.ERROR, function (e, d) { if (d && d.fatal) fallback(); });
+      hls.loadSource(v.hls); hls.attachMedia(V);
+      setState(v.height + 'p');
+    } else if (V.canPlayType('application/vnd.apple.mpegurl')) {
+      V.src = v.hls; setState(v.height + 'p');
+    } else { fallback(); }
+    if (autoplay) V.play().catch(function () {});
+    renderInfo(v);
+    document.querySelectorAll('.vrow').forEach(function (b) { b.classList.toggle('on', +b.dataset.i === i); });
+  }
+  V.addEventListener('error', function () { if (!usingFallback) fallback(); });
+  // 화면 가운데 누르기 = 재생 · 정지, 두 번 누르기 = 전체 화면
+  var PL = V.parentNode, hit = document.getElementById('vhit'), clickT = null;
+  function syncPaused() { PL.classList.toggle('paused', V.paused); }
+  V.addEventListener('play', syncPaused); V.addEventListener('pause', syncPaused); V.addEventListener('ended', syncPaused);
+  hit.addEventListener('click', function () {
+    clearTimeout(clickT);
+    clickT = setTimeout(function () { if (V.paused) V.play().catch(function () {}); else V.pause(); }, 220);
+  });
+  hit.addEventListener('dblclick', function () {
+    clearTimeout(clickT);
+    var fs = document.fullscreenElement;
+    if (fs) document.exitFullscreen().catch(function () {});
+    else (PL.requestFullscreen ? PL.requestFullscreen() : V.requestFullscreen ? V.requestFullscreen() : Promise.resolve()).catch(function () {});
+  });
+  hit.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); if (V.paused) V.play().catch(function () {}); else V.pause(); } });
+  // 재생을 눌렀는데 6초 동안 화면이 멈춰 있으면 예비 영상으로
+  V.addEventListener('play', function () {
+    clearTimeout(watchdog);
+    var t0 = V.currentTime;
+    watchdog = setTimeout(function () { if (!V.paused && V.currentTime === t0 && !usingFallback) fallback(); }, 6000);
+  });
+  function renderInfo(v) {
+    var b = 'videos.' + v.si + '.', k = function (p) { return ' data-k="' + b + p + '"'; };
+    var h = '<p class="kind"' + k('kind') + '>' + esc(v.kind) + '</p><h3' + k('title') + '>' + esc(v.title) + '</h3>';
+    if (v.meta && v.meta.length) h += '<dl class="vmeta">' + v.meta.map(function (m, i) { return '<dt' + k('meta.' + i + '.0') + '>' + esc(m[0]) + '</dt><dd' + k('meta.' + i + '.1') + '>' + esc(m[1]) + '</dd>'; }).join('') + '</dl>';
+    if (v.points && v.points.length) h += '<div class="vblock">' + lb('vPoints', 'h4') + '<ul class="lines"' + k('points') + '>' + v.points.map(function (p, i) { return '<li' + k('points.' + i) + '>' + esc(p) + '</li>'; }).join('') + '</ul></div>';
+    // 구간은 늘 그린다(편집 모드에서 [+ 구간 더하기]를 쓸 수 있게) — 공개 페이지에선 구간이 없으면 칸째 숨김
+    h += '<div class="vblock chap">' + lb('vChapters', 'h4') + (v.chapters || []).map(function (c, i) {
+      return '<div class="chap-row" data-t="' + c[0] + '"><button type="button" class="chap-go" data-t="' + c[0] + '" aria-label="Play this section">▶</button>' +
+        '<span class="chap-time"><span' + k('chapters.' + i + '.0') + '>' + esc(c[1]) + '</span><span class="chap-dash"> – </span><span' + k('chapters.' + i + '.2') + '>' + esc(c[3]) + '</span></span>' +
+        '<span class="chap-label"' + k('chapters.' + i + '.1') + '>' + esc(c[2]) + '</span>' +
+        '<button type="button" class="chap-del ed-only" data-ci="' + i + '" title="이 구간 빼기">✕</button></div>';
+    }).join('') + '<button type="button" class="chap-add ed-only" data-vi="' + v.si + '">+ 구간 더하기</button></div>';
+    // 함께 보기: 늘 보이게 — 맨 위는 유튜브 원본, 그 아래 기획서 · 디렉팅 같은 링크
+    var links = [[LBL.vYoutube, 'https://www.youtube.com/watch?v=' + v.id, ' data-k="labels.vYoutube"']].concat((v.links || []).map(function (l, i) { return [l[0], l[1], k('links.' + i + '.0')]; }));
+    // '#plan-…' 은 이 페이지 안의 기획서 화면 — 새 창 없이 넘어간다(→), 바깥 링크는 새 창(↗)
+    h += '<div class="vblock">' + lb('vLinks', 'h4') + links.map(function (l, i) {
+      var inner = String(l[1]).charAt(0) === '#';
+      return '<p data-m="link:videos.' + v.si + '.' + i + '"><a href="' + esc(l[1]) + '"' + (inner ? '' : ' target="_blank" rel="noopener"') + '><span' + l[2] + '>' + esc(l[0]) + '</span> ' + (inner ? '→' : '↗') + '</a></p>';
+    }).join('') + '</div>';
+    info.innerHTML = h;
+  }
+  document.getElementById('vlist').addEventListener('click', function (e) { var b = e.target.closest('.vrow'); if (b) { load(+b.dataset.i, true); V.scrollIntoView({ block: 'center' }); } });
+  info.addEventListener('click', function (e) { if (e.target.closest('.ed-only, [contenteditable]')) return; var b = e.target.closest('[data-t]'); if (b) { V.currentTime = +b.dataset.t; V.play().catch(function () {}); } });
+  // 학습노트 작은 탭
+  var ntabs = document.querySelector('.ntabs');
+  if (ntabs) ntabs.addEventListener('click', function (e) {
+    var b = e.target.closest('.ntab'); if (!b) return;
+    ntabs.querySelectorAll('.ntab').forEach(function (x) { var on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-selected', on ? 'true' : 'false'); });
+    document.querySelectorAll('.npanel').forEach(function (p) { p.hidden = p.getAttribute('data-panel') !== b.getAttribute('data-tab'); });
+  });
+  // 편집 모드(edit-design.js)가 구간을 더하고 뺄 때 다시 그리려고 내놓음
+  window.PF = { VIDS: VIDS, renderInfo: renderInfo, cur: function () { return cur; } };
+  if (VIDS.length) load(0, false);
+
+  // 영상 기획서 화면 — 주소 끝이 #plan-<id> 이면 본문 대신 그 기획서를 보인다. 다른 # 이면 본문으로 돌아온다
+  var MAIN = document.getElementById('top');
+  function route() {
+    var h = location.hash || '', plan = h.indexOf('#plan-') === 0 ? document.getElementById(h.slice(1)) : null;
+    document.querySelectorAll('.plan').forEach(function (p) { p.hidden = p !== plan; });
+    MAIN.hidden = !!plan;
+    if (plan) { if (!V.paused) V.pause(); window.scrollTo(0, 0); }
+    else if (h.length > 1) { var t = document.getElementById(h.slice(1)); if (t) t.scrollIntoView(); }
+  }
+  window.addEventListener('hashchange', route);
+  route();
+  // 기획서의 시간(디렉션 표) · "이 영상 보기" → 본문 영상으로 돌아가 그 장면부터 재생
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.cue[data-vi]'); if (!b) return;
+    var vi = +b.dataset.vi, t = +b.dataset.t || 0;
+    if (location.hash !== '#videos') location.hash = '#videos';
+    load(vi, false);
+    var go = function () { try { V.currentTime = t; } catch (err) {} V.play().catch(function () {}); };
+    if (V.readyState >= 1) go(); else V.addEventListener('loadedmetadata', function once() { V.removeEventListener('loadedmetadata', once); go(); });
+    setTimeout(function () { V.scrollIntoView({ block: 'center' }); }, 50);
+  });
+
+  // 사진 넘기기
+  document.querySelectorAll('.gal').forEach(function (g) {
+    g.addEventListener('click', function (e) {
+      var b = e.target.closest('.gal-thumbs button'); if (!b) return;
+      var main = g.querySelector('.gal-main img'), cap = g.querySelector('.gal-main figcaption');
+      main.src = b.dataset.src; main.alt = b.dataset.cap; cap.textContent = b.dataset.cap;
+      g.querySelectorAll('.gal-thumbs button').forEach(function (x) { x.classList.toggle('on', x === b); });
+    });
+  });
+
+  // 옆으로 넘겨 보기 — 모두 문서에서 받음(편집 모드가 묶음을 바꿔 끼워도 동작)
+  var slT = function (sl) { return sl.querySelector('.sl-track'); };
+  var slIdx = function (t) { return t.clientWidth ? Math.round(t.scrollLeft / t.clientWidth) : 0; };
+  var slGo = function (sl, i) { var t = slT(sl); i = Math.max(0, Math.min(t.children.length - 1, i)); t.scrollTo({ left: i * t.clientWidth, behavior: 'smooth' }); };
+  var slSync = function (sl) {
+    var t = slT(sl), n = t.children.length, i = slIdx(t), b = sl.querySelector('.sl-n b'), ln = sl.querySelector('.sl-line i');
+    if (b) b.textContent = i + 1;
+    if (ln) ln.style.left = (i * 100 / n) + '%';
+    var p = sl.querySelector('.sl-prev'), q = sl.querySelector('.sl-next');
+    if (p) p.disabled = i <= 0; if (q) q.disabled = i >= n - 1;
+    var g = t.children[i] && t.children[i].getAttribute('data-g');
+    if (g != null) document.querySelectorAll('.pgm-list li').forEach(function (li) { li.classList.toggle('on', li.getAttribute('data-g') === g); });
+  };
+  var slAll = function () { document.querySelectorAll('.sl').forEach(slSync); };
+  slAll(); window.addEventListener('resize', slAll); window.addEventListener('load', slAll);
+  document.addEventListener('scroll', function (e) { var t = e.target; if (t.classList && t.classList.contains('sl-track')) slSync(t.closest('.sl')); }, true);
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.sl-prev, .sl-next');
+    if (b) { var sl = b.closest('.sl'); slGo(sl, slIdx(slT(sl)) + (b.classList.contains('sl-next') ? 1 : -1)); return; }
+    var li = e.target.closest('.pgm-list li[data-to]');
+    if (li && !document.documentElement.classList.contains('ed-mode')) { var ps = document.querySelector('.pgm .sl'); if (ps) slGo(ps, +li.getAttribute('data-to')); }
+  });
+  document.addEventListener('keydown', function (e) {
+    var t = e.target.closest && e.target.closest('.sl-track'); if (!t || (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight')) return;
+    e.preventDefault(); slGo(t.closest('.sl'), slIdx(t) + (e.key === 'ArrowRight' ? 1 : -1));
+  });
+  // 마우스로 끌어 넘기기 (손가락은 브라우저가 알아서 밀어 줌)
+  var slDrag = null;
+  document.addEventListener('pointerdown', function (e) {
+    if (e.pointerType !== 'mouse' || e.button !== 0 || document.documentElement.classList.contains('ed-mode')) return;
+    var t = e.target.closest('.sl-track'); if (!t) return;
+    slDrag = { t: t, x: e.clientX, s: t.scrollLeft, i: slIdx(t), moved: false };
+  });
+  document.addEventListener('pointermove', function (e) {
+    if (!slDrag) return;
+    var dx = e.clientX - slDrag.x;
+    if (!slDrag.moved && Math.abs(dx) < 4) return;
+    slDrag.moved = true; slDrag.t.classList.add('drag'); slDrag.t.scrollLeft = slDrag.s - dx;
+  });
+  document.addEventListener('pointerup', function (e) {
+    if (!slDrag) return;
+    var d = slDrag; slDrag = null;
+    if (!d.moved) return;
+    var dx = e.clientX - d.x, w = d.t.clientWidth;
+    var to = Math.abs(dx) > w * 0.12 ? d.i + (dx < 0 ? 1 : -1) : d.i;
+    d.t.classList.remove('drag'); slGo(d.t.closest('.sl'), to);
+    var k = function (ev) { ev.stopPropagation(); ev.preventDefault(); };   // 끈 뒤 따라오는 클릭은 버림
+    d.t.addEventListener('click', k, true);
+    setTimeout(function () { d.t.removeEventListener('click', k, true); }, 0);
+  });
+
+  // 그림·영상 저장 막기
+  document.addEventListener('contextmenu', function (e) { if (e.target.closest('img, video, .player, .gal, .sl')) e.preventDefault(); });
+  document.addEventListener('dragstart', function (e) { if (e.target.closest('img, video')) e.preventDefault(); });
+
+  // 이메일 복사
+  document.getElementById('copyMail').addEventListener('click', function () {
+    var b = this, t = document.getElementById('mail').textContent;
+    var done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, select); else select();
+    function select() { var r = document.createRange(); r.selectNodeContents(document.getElementById('mail')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected · Ctrl+C'; }
+  });
+})();
+</script>
+
+</html>
