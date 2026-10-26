@@ -141,6 +141,11 @@ section { padding-block: 64px; border-bottom: 1px solid var(--line); }
 .chap-add { margin-top: 10px; display: inline-block; border-bottom: 1px solid var(--g-line); }
 html:not(.ed-mode) .ed-only { display: none !important; }
 html:not(.ed-mode) .chap:not(:has(.chap-row)) { display: none; }
+.reelsw { display: flex; gap: 8px; align-items: center; margin: 6px 0 0; font: 400 12.5px var(--mono); color: var(--dim); }
+.reelsw button { all: unset; cursor: pointer; color: var(--dim); padding: 2px 0; border-bottom: 1px solid transparent; }
+.reelsw button:hover { color: var(--body); }
+.reelsw button[aria-pressed="true"] { color: var(--hi); border-bottom-color: var(--g); }
+#vlist li[hidden] { display: none; }
 .vrow { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: 128px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 14px; padding-block: 12px; border-bottom: 1px solid var(--line); width: 100%; }
 .vrow img { grid-row: 1 / span 2; width: 128px; height: 72px; object-fit: cover; opacity: .75; }
 .vrow-t { color: var(--body); font-weight: 500; align-self: end; }
@@ -313,6 +318,7 @@ footer { padding-block: 32px 48px; font-size: 12px; color: var(--dim); }
 [data-m="ph:p1"] { transform: translate(852px, 12px); width: 186px; max-width: none; flex-basis: 186px; --w: 186px; } [data-m="ph:p1"]:is(span, a, b) { display: inline-block; }
 [data-m="box:notesWhy"] { transform: translate(0px, -2px); } [data-m="box:notesWhy"]:is(span, a, b) { display: inline-block; }
 [data-m="vlist"] { transform: translate(-8px, 0px); } [data-m="vlist"]:is(span, a, b) { display: inline-block; }
+[data-k="profile.intro"] { transform: translate(0px, 14px); width: 595px; max-width: none; flex-basis: 595px; --w: 595px; } [data-k="profile.intro"]:is(span, a, b) { display: inline-block; }
 }
 </style><style>
 /* 뺀 것 (편집 모드 [✕ 빼기]) */
@@ -404,37 +410,37 @@ html:not(.ed-mode) :is([data-k="profile.facts"], [data-k="labels.notesHead"], [d
         <div class="vinfo" id="vinfo" data-m="vinfo"></div>
       </div>
       <ol class="vside" id="vlist" data-m="vlist">
-      <li data-id="qJQO0FiphRs"><button type="button" class="vrow" data-i="0" aria-label="The Last of Us Part II 재생">
+      <li data-id="qJQO0FiphRs" data-region="west"><button type="button" class="vrow" data-i="0" aria-label="The Last of Us Part II 재생">
         <img src="img/사진넣기_영상_qJQO0FiphRs.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_qJQO0FiphRs">
         <span class="vrow-t">The Last of Us Part II</span>
         <span class="vrow-m">Trailer (gameplay edit) · Sound Redesign · 2:26</span>
       </button></li>
-      <li data-id="j7EaNF1skhE"><button type="button" class="vrow" data-i="1" aria-label="퍼스트 버서커: 카잔 인게임 영상 재생">
+      <li data-id="j7EaNF1skhE" data-region="asia"><button type="button" class="vrow" data-i="1" aria-label="퍼스트 버서커: 카잔 인게임 영상 재생">
         <img src="img/사진넣기_영상_j7EaNF1skhE.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_j7EaNF1skhE">
         <span class="vrow-t">퍼스트 버서커: 카잔 인게임 영상</span>
         <span class="vrow-m"> · 1:14</span>
       </button></li>
-      <li data-id="kYxwDrfYFCw"><button type="button" class="vrow" data-i="2" aria-label="ArcheAge War 재생">
+      <li data-id="kYxwDrfYFCw" data-region="asia"><button type="button" class="vrow" data-i="2" aria-label="ArcheAge War 재생">
         <img src="img/사진넣기_영상_kYxwDrfYFCw.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_kYxwDrfYFCw">
         <span class="vrow-t">ArcheAge War</span>
         <span class="vrow-m">Trailer · Sound Redesign · 1:38</span>
       </button></li>
-      <li data-id="rc-eExao-ls"><button type="button" class="vrow" data-i="3" aria-label="LORDNINE 재생">
+      <li data-id="rc-eExao-ls" data-region="asia"><button type="button" class="vrow" data-i="3" aria-label="LORDNINE 재생">
         <img src="img/사진넣기_영상_rc-eExao-ls.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_rc-eExao-ls">
         <span class="vrow-t">LORDNINE</span>
         <span class="vrow-m">Trailer · Sound Redesign · 1:17</span>
       </button></li>
-      <li data-id="06eVmlKTqvA"><button type="button" class="vrow" data-i="4" aria-label="Dungeons &amp; Dragons 재생">
+      <li data-id="06eVmlKTqvA" data-region="west"><button type="button" class="vrow" data-i="4" aria-label="Dungeons &amp; Dragons 재생">
         <img src="img/사진넣기_영상_06eVmlKTqvA.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_06eVmlKTqvA">
         <span class="vrow-t">Dungeons &amp; Dragons</span>
         <span class="vrow-m">Cinematic trailer · Sound Redesign · 1:45</span>
       </button></li>
-      <li data-id="NO-JkYMjjtY"><button type="button" class="vrow" data-i="5" aria-label="Back4blood 인게임 영상 재생">
+      <li data-id="NO-JkYMjjtY" data-region="west"><button type="button" class="vrow" data-i="5" aria-label="Back4blood 인게임 영상 재생">
         <img src="img/사진넣기_영상_NO-JkYMjjtY.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_NO-JkYMjjtY">
         <span class="vrow-t">Back4blood 인게임 영상</span>
         <span class="vrow-m"> · 0:56</span>
       </button></li>
-      <li data-id="wBZLKIVBC8w"><button type="button" class="vrow" data-i="6" aria-label="Back 4 Blood 재생">
+      <li data-id="wBZLKIVBC8w" data-region="west"><button type="button" class="vrow" data-i="6" aria-label="Back 4 Blood 재생">
         <img src="img/사진넣기_영상_wBZLKIVBC8w.jpg" alt="" width="128" height="72" loading="lazy" draggable="false" data-slot="사진넣기/영상_wBZLKIVBC8w">
         <span class="vrow-t">Back 4 Blood</span>
         <span class="vrow-m">Trailer · Sound Redesign · 1:47</span>
@@ -611,7 +617,8 @@ html:not(.ed-mode) :is([data-k="profile.facts"], [data-k="labels.notesHead"], [d
 <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.8/dist/hls.min.js"></script>
 <script>
 (function () {
-  var VIDS = [{"id":"qJQO0FiphRs","si":0,"title":"The Last of Us Part II","kind":"Trailer (gameplay edit) · Sound Redesign","meta":[["Developer · Publisher","Naughty Dog · Sony Interactive Entertainment"],["Genre","Action adventure · Survival horror"],["My role","Voice directing (Ellie), Foley recording, sound design, mix & master"],["DAW","Cubase 13"]],"points":["Voice: I cast and directed a voice actor for Ellie myself. I set the brief (around 17 to 19, mid-range voice, anger mixed with tension) and wrote direction for every moment, from pulling out an arrow to whispered lines while sneaking.","Foley: I recorded my own Foley with a PCM-A10 and built the SFX from it. A paper-wrapped wooden chopstick twisted for bowstring tension, coins in a bag for steps on grass. The UI also comes from real objects: a light bulb, cloth, a can.","Scripted vs. gameplay: in scripted moments, like pulling out the arrow or a short line, the voice and sound follow the edit like a cutscene with clear emotional peaks. In gameplay moments, sound works like the game itself: Ellie's breathing changes with enemy distance (none beyond 5 m, light at 2 to 3 m, rough within 1 m), so danger reads without any HUD.","Ambience: a danso's wind, a balloon losing air and guitar string scratches, under the reverb of the building, so the tension never fully resolves."],"links":[["Sound design document · Voice direction","#plan-tlou2"]],"chapters":[[0,"0:00","Stealth · watching enemies inside the store","0:27"],[43,"0:43","Stealth kill · close Foley","0:50"],[65,"1:05","Crafting screen · UI sound","1:09"],[72,"1:12","Spotted · melee fight","1:27"],[102,"1:42","Bow and melee attacks","1:57"],[118,"1:58","Final kill · Ellie's lines","2:16"]],"hls":"media/qJQO0FiphRs/hls/index.txt","fallback":"media/qJQO0FiphRs/fallback.mp4","poster":"img/사진넣기_영상_qJQO0FiphRs.jpg","duration":146,"height":1080},{"id":"j7EaNF1skhE","si":1,"title":"퍼스트 버서커: 카잔 인게임 영상","kind":"","meta":[],"points":["[ 시청 시 이어폰 or 헤드폰을 껴주시면 더욱 즐겁게 들으실 수 있습니다 ]","- 게임 이름 : 퍼스트 버서커: 카잔 ( The First Berserker: Khazan )","- 개발 : 네오플 / 배급 : 넥슨","- 엔진 : 언리얼 엔진 4","- 장르 : 액션 RPG [ 하드코어 액션 / 소울라이크 ]","- 연동 기기 : 스팀( PC ) / 플레이스테이션 5 / XBOX Series X|S","- 사용 DAW : cubase 13","[ 사운드 디자인 내용 ]","- 광폭한 버서커인 카잔의 성격을 살리기 위해 무겁고 금속감 있는 타격음과 피가 튀는 Gore 사운드를 중심으로 제작했습니다.","- 대검 Swing / Hit / Scrape / Ring 사운드는 직접 만든 소스(MSFX)를 레이어해 무기의 무게감과 날의 울림을 표현했습니다.","- 갑옷과 사슬이 부딪히는 Metal Ring 레이어를 더해 근접 전투의 질감을 살렸습니다.","- 보스의 보라색 어둠 마법 패턴은 카잔의 붉은 피 계열 스킬과 대비되도록 Magic / Energy 사운드 소스를 이용해 다른 색깔로 디자인했습니다."],"links":[],"chapters":[],"hls":"media/j7EaNF1skhE/hls/index.txt","fallback":"media/j7EaNF1skhE/fallback.mp4","poster":"img/사진넣기_영상_j7EaNF1skhE.jpg","duration":74,"height":1080},{"id":"kYxwDrfYFCw","si":2,"title":"ArcheAge War","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","XLGAMES · Kakao Games"],["Engine","Unreal Engine 4"],["Platform","PC & mobile"],["My role","Sound design, mix & master"],["DAW","Cubase 12"]],"points":["Epic style: I built the trailer on the traits of epic game sound. Bright, high-pitched sounds add fun, while the low end makes every scene feel grander.","Big moments: the wall explosion and the bridge explosion carry the climax, and the logo sound closes the trailer before a short post-credit scene."],"links":[],"chapters":[[0,"0:00","Intro","0:15"],[15,"0:15","Battlefield (castle view)","0:21"],[21,"0:21","Battlefield (outskirts)","0:30"],[30,"0:30","The battle begins","0:36"],[36,"0:36","Paladin fight","0:40"],[40,"0:40","Mage fight","0:47"],[47,"0:47","Hero scene","0:58"],[58,"0:58","Wall explosion","1:03"],[63,"1:03","Hero scene","1:10"],[70,"1:10","Bridge explosion & climax","1:25"],[85,"1:25","Logo sound","1:29"],[89,"1:29","Post-credit scene","1:38"]],"hls":"media/kYxwDrfYFCw/hls/index.txt","fallback":"media/kYxwDrfYFCw/fallback.mp4","poster":"img/사진넣기_영상_kYxwDrfYFCw.jpg","duration":98,"height":1080},{"id":"rc-eExao-ls","si":3,"title":"LORDNINE","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","NX3 Games · Smilegate"],["Genre","MMORPG"],["Engine","Unity"],["My role","Sound design, mix & master"],["DAW","Cubase 13"]],"points":["Build-up: risers carry the tension through the rising part of the trailer and make the viewer expect the next shot.","Scale: for the army gathering, I used sub-bass sources and Scheps 73 to give the low end more weight and resonance, so the crowd feels heavy rather than just loud."],"links":[],"chapters":[],"hls":"media/rc-eExao-ls/hls/index.txt","fallback":"media/rc-eExao-ls/fallback.mp4","poster":"img/사진넣기_영상_rc-eExao-ls.jpg","duration":77,"height":1080},{"id":"06eVmlKTqvA","si":4,"title":"Dungeons & Dragons","kind":"Cinematic trailer · Sound Redesign","meta":[["Video","Unofficial cinematic"],["Genre","Fantasy action"],["My role","Sound design, character voice editing, mix & master"],["DAW","Cubase 13"]],"points":["Dragon: the dragon's fury is carried by mid and low frequencies to keep the battle tense, with comic moments placed in between to make it fun.","Voices: I searched library sources that suit each character and placed voices that fit each situation.","Foley: for the grand 3D visuals I paid close attention to Foley, and used panning so the sound feels more real."],"links":[],"chapters":[],"hls":"media/06eVmlKTqvA/hls/index.txt","fallback":"media/06eVmlKTqvA/fallback.mp4","poster":"img/사진넣기_영상_06eVmlKTqvA.jpg","duration":105,"height":1080},{"id":"NO-JkYMjjtY","si":5,"title":"Back4blood 인게임 영상","kind":"","meta":[],"points":["[ 시청 시 이이폰 or 헤드폰을 껴주시면 더욱 즐겁게 들으실 수 있습니다 ]","- 게임 이름 : 백 4 블러드","- 엔진 : 언리얼 엔진 4","- 연동 기기 : 스팀( PC ) / 플레이스테이션 5 / XBOX","[ 사운드 디자인 내용 ]","백 4 블러드는 고증 된 사운드를 표현한 게임으로써 Gun 사운드와 피격 사운드를 리얼리티 있게 제작했습니다.","[ 인게임 주안점 ]","- 맵의 특징에 맞는 AMB 설정을 했습니다.","1) 건물 내부 : 먹먹한 느낌의 내부 공간 ( 발소리 : 콘크리트, 메탈 )","2) 다리 : 철로 이뤄진 천장에 빗소리가 떨어지고 있는 느낌의 AMB ( 발소리 : 우드 )","3) 오두막 : 문 밖을 바라보는 시선에선 빗소리가 뚜렷하게 들릴 수 있도록 사운드를 제작했고 빗소리로 인해 Gun Shot 사운드가 완전 퍼지지 않도록 표현했습니다.","- 시점 / 플레이어의 위치에 따라 달라지는 사운드를 제작했습니다."],"links":[],"chapters":[],"hls":"media/NO-JkYMjjtY/hls/index.txt","fallback":"media/NO-JkYMjjtY/fallback.mp4","poster":"img/사진넣기_영상_NO-JkYMjjtY.jpg","duration":56,"height":1080},{"id":"wBZLKIVBC8w","si":6,"title":"Back 4 Blood","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","Turtle Rock Studios · Warner Bros. Games"],["Engine","Unreal Engine 4"],["Platform","PC · PS5 · Xbox"],["My role","Voice directing (special zombies), sound design, mix & master"],["DAW","Cubase 13"]],"points":["Voice: I directed the voices of the special zombies myself so each one shows its own character.","Realism: guns, hits and Foley were made to sound grounded, and panned to sit in space like real recordings.","Tension: a low-end bed runs under the trailer so the tension holds while the viewer watches."],"links":[],"chapters":[],"hls":"media/wBZLKIVBC8w/hls/index.txt","fallback":"media/wBZLKIVBC8w/fallback.mp4","poster":"img/사진넣기_영상_wBZLKIVBC8w.jpg","duration":107,"height":1080}];
+  var VIDS = [{"id":"qJQO0FiphRs","si":0,"title":"The Last of Us Part II","kind":"Trailer (gameplay edit) · Sound Redesign","meta":[["Developer · Publisher","Naughty Dog · Sony Interactive Entertainment"],["Genre","Action adventure · Survival horror"],["My role","Voice directing (Ellie), Foley recording, sound design, mix & master"],["DAW","Cubase 13"]],"points":["Voice: I cast and directed a voice actor for Ellie myself. I set the brief (around 17 to 19, mid-range voice, anger mixed with tension) and wrote direction for every moment, from pulling out an arrow to whispered lines while sneaking.","Foley: I recorded my own Foley with a PCM-A10 and built the SFX from it. A paper-wrapped wooden chopstick twisted for bowstring tension, coins in a bag for steps on grass. The UI also comes from real objects: a light bulb, cloth, a can.","Scripted vs. gameplay: in scripted moments, like pulling out the arrow or a short line, the voice and sound follow the edit like a cutscene with clear emotional peaks. In gameplay moments, sound works like the game itself: Ellie's breathing changes with enemy distance (none beyond 5 m, light at 2 to 3 m, rough within 1 m), so danger reads without any HUD.","Ambience: a danso's wind, a balloon losing air and guitar string scratches, under the reverb of the building, so the tension never fully resolves."],"links":[["Sound design document · Voice direction","#plan-tlou2"]],"chapters":[[0,"0:00","Stealth · watching enemies inside the store","0:27"],[43,"0:43","Stealth kill · close Foley","0:50"],[65,"1:05","Crafting screen · UI sound","1:09"],[72,"1:12","Spotted · melee fight","1:27"],[102,"1:42","Bow and melee attacks","1:57"],[118,"1:58","Final kill · Ellie's lines","2:16"]],"hls":"media/qJQO0FiphRs/hls/index.txt","fallback":"media/qJQO0FiphRs/fallback.mp4","poster":"img/사진넣기_영상_qJQO0FiphRs.jpg","duration":146,"height":1080,"region":"west"},{"id":"j7EaNF1skhE","si":1,"title":"퍼스트 버서커: 카잔 인게임 영상","kind":"","meta":[],"points":["[ 시청 시 이어폰 or 헤드폰을 껴주시면 더욱 즐겁게 들으실 수 있습니다 ]","- 게임 이름 : 퍼스트 버서커: 카잔 ( The First Berserker: Khazan )","- 개발 : 네오플 / 배급 : 넥슨","- 엔진 : 언리얼 엔진 4","- 장르 : 액션 RPG [ 하드코어 액션 / 소울라이크 ]","- 연동 기기 : 스팀( PC ) / 플레이스테이션 5 / XBOX Series X|S","- 사용 DAW : cubase 13","[ 사운드 디자인 내용 ]","- 광폭한 버서커인 카잔의 성격을 살리기 위해 무겁고 금속감 있는 타격음과 피가 튀는 Gore 사운드를 중심으로 제작했습니다.","- 대검 Swing / Hit / Scrape / Ring 사운드는 직접 만든 소스(MSFX)를 레이어해 무기의 무게감과 날의 울림을 표현했습니다.","- 갑옷과 사슬이 부딪히는 Metal Ring 레이어를 더해 근접 전투의 질감을 살렸습니다.","- 보스의 보라색 어둠 마법 패턴은 카잔의 붉은 피 계열 스킬과 대비되도록 Magic / Energy 사운드 소스를 이용해 다른 색깔로 디자인했습니다."],"links":[],"chapters":[],"hls":"media/j7EaNF1skhE/hls/index.txt","fallback":"media/j7EaNF1skhE/fallback.mp4","poster":"img/사진넣기_영상_j7EaNF1skhE.jpg","duration":74,"height":1080,"region":"asia"},{"id":"kYxwDrfYFCw","si":2,"title":"ArcheAge War","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","XLGAMES · Kakao Games"],["Engine","Unreal Engine 4"],["Platform","PC & mobile"],["My role","Sound design, mix & master"],["DAW","Cubase 12"]],"points":["Epic style: I built the trailer on the traits of epic game sound. Bright, high-pitched sounds add fun, while the low end makes every scene feel grander.","Big moments: the wall explosion and the bridge explosion carry the climax, and the logo sound closes the trailer before a short post-credit scene."],"links":[],"chapters":[[0,"0:00","Intro","0:15"],[15,"0:15","Battlefield (castle view)","0:21"],[21,"0:21","Battlefield (outskirts)","0:30"],[30,"0:30","The battle begins","0:36"],[36,"0:36","Paladin fight","0:40"],[40,"0:40","Mage fight","0:47"],[47,"0:47","Hero scene","0:58"],[58,"0:58","Wall explosion","1:03"],[63,"1:03","Hero scene","1:10"],[70,"1:10","Bridge explosion & climax","1:25"],[85,"1:25","Logo sound","1:29"],[89,"1:29","Post-credit scene","1:38"]],"hls":"media/kYxwDrfYFCw/hls/index.txt","fallback":"media/kYxwDrfYFCw/fallback.mp4","poster":"img/사진넣기_영상_kYxwDrfYFCw.jpg","duration":98,"height":1080,"region":"asia"},{"id":"rc-eExao-ls","si":3,"title":"LORDNINE","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","NX3 Games · Smilegate"],["Genre","MMORPG"],["Engine","Unity"],["My role","Sound design, mix & master"],["DAW","Cubase 13"]],"points":["Build-up: risers carry the tension through the rising part of the trailer and make the viewer expect the next shot.","Scale: for the army gathering, I used sub-bass sources and Scheps 73 to give the low end more weight and resonance, so the crowd feels heavy rather than just loud."],"links":[],"chapters":[],"hls":"media/rc-eExao-ls/hls/index.txt","fallback":"media/rc-eExao-ls/fallback.mp4","poster":"img/사진넣기_영상_rc-eExao-ls.jpg","duration":77,"height":1080,"region":"asia"},{"id":"06eVmlKTqvA","si":4,"title":"Dungeons & Dragons","kind":"Cinematic trailer · Sound Redesign","meta":[["Video","Unofficial cinematic"],["Genre","Fantasy action"],["My role","Sound design, character voice editing, mix & master"],["DAW","Cubase 13"]],"points":["Dragon: the dragon's fury is carried by mid and low frequencies to keep the battle tense, with comic moments placed in between to make it fun.","Voices: I searched library sources that suit each character and placed voices that fit each situation.","Foley: for the grand 3D visuals I paid close attention to Foley, and used panning so the sound feels more real."],"links":[],"chapters":[],"hls":"media/06eVmlKTqvA/hls/index.txt","fallback":"media/06eVmlKTqvA/fallback.mp4","poster":"img/사진넣기_영상_06eVmlKTqvA.jpg","duration":105,"height":1080,"region":"west"},{"id":"NO-JkYMjjtY","si":5,"title":"Back4blood 인게임 영상","kind":"","meta":[],"points":["[ 시청 시 이이폰 or 헤드폰을 껴주시면 더욱 즐겁게 들으실 수 있습니다 ]","- 게임 이름 : 백 4 블러드","- 엔진 : 언리얼 엔진 4","- 연동 기기 : 스팀( PC ) / 플레이스테이션 5 / XBOX","[ 사운드 디자인 내용 ]","백 4 블러드는 고증 된 사운드를 표현한 게임으로써 Gun 사운드와 피격 사운드를 리얼리티 있게 제작했습니다.","[ 인게임 주안점 ]","- 맵의 특징에 맞는 AMB 설정을 했습니다.","1) 건물 내부 : 먹먹한 느낌의 내부 공간 ( 발소리 : 콘크리트, 메탈 )","2) 다리 : 철로 이뤄진 천장에 빗소리가 떨어지고 있는 느낌의 AMB ( 발소리 : 우드 )","3) 오두막 : 문 밖을 바라보는 시선에선 빗소리가 뚜렷하게 들릴 수 있도록 사운드를 제작했고 빗소리로 인해 Gun Shot 사운드가 완전 퍼지지 않도록 표현했습니다.","- 시점 / 플레이어의 위치에 따라 달라지는 사운드를 제작했습니다."],"links":[],"chapters":[],"hls":"media/NO-JkYMjjtY/hls/index.txt","fallback":"media/NO-JkYMjjtY/fallback.mp4","poster":"img/사진넣기_영상_NO-JkYMjjtY.jpg","duration":56,"height":1080,"region":"west"},{"id":"wBZLKIVBC8w","si":6,"title":"Back 4 Blood","kind":"Trailer · Sound Redesign","meta":[["Developer · Publisher","Turtle Rock Studios · Warner Bros. Games"],["Engine","Unreal Engine 4"],["Platform","PC · PS5 · Xbox"],["My role","Voice directing (special zombies), sound design, mix & master"],["DAW","Cubase 13"]],"points":["Voice: I directed the voices of the special zombies myself so each one shows its own character.","Realism: guns, hits and Foley were made to sound grounded, and panned to sit in space like real recordings.","Tension: a low-end bed runs under the trailer so the tension holds while the viewer watches."],"links":[],"chapters":[],"hls":"media/wBZLKIVBC8w/hls/index.txt","fallback":"media/wBZLKIVBC8w/fallback.mp4","poster":"img/사진넣기_영상_wBZLKIVBC8w.jpg","duration":107,"height":1080,"region":"west"}];
+  var REEL_L = {"all":"All","west":"Western","asia":"Asian"};
   var V = document.getElementById('player'), state = document.getElementById('vstate'), info = document.getElementById('vinfo');
   var hls = null, cur = -1, usingFallback = false, watchdog = null;
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
@@ -712,7 +719,43 @@ html:not(.ed-mode) :is([data-k="profile.facts"], [data-k="labels.notesHead"], [d
     var nav = document.querySelector('.nav');
     if (nav) ORDER.forEach(function (id) { var a = nav.querySelector('a[href="#' + id + '"]'); if (a) nav.appendChild(a); });
   })();
-  if (VIDS.length) load(0, false);
+  // ── 서양 · 아시아 (2026-10-26) — 링크 끝 ?reel=west | asia 면 그 지역 영상만(둘 다인 영상은 양쪽). 편집 화면은 늘 전부
+  var EDIT = /[?&]edit\b/.test(location.search);
+  var REEL = (function () { var m = /[?&]reel=(west|asia)\b/.exec(location.search); return EDIT || !m ? '' : m[1]; })();
+  var COUNT_T = null;   // 개수 글 원래 모양(사용자가 쓴 글) — 숫자만 바꿔 끼운다
+  function applyReel(r, first) {
+    REEL = r;
+    var firstI = -1, n = 0, secs = 0;
+    document.querySelectorAll('#vlist li[data-id]').forEach(function (li) {
+      var bt = li.querySelector('.vrow'), i = bt ? +bt.dataset.i : -1, v = VIDS[i];
+      var ok = !!v && (!REEL || !v.region || v.region === 'both' || v.region === REEL);
+      li.hidden = !ok;
+      if (ok) { n++; secs += v.duration || 0; if (firstI < 0) firstI = i; }
+    });
+    var c = document.querySelector('#videos .sec-h [data-k="labels.videosCount"]');
+    if (c && !EDIT) {
+      if (COUNT_T == null) COUNT_T = c.textContent;
+      var k = 0, mins = Math.max(1, Math.round(secs / 60));
+      c.textContent = COUNT_T.replace(/\d+(?:\.\d+)?/g, function (x) { k++; return k === 1 ? n : k === 2 ? mins : x; });
+    }
+    document.querySelectorAll('.reelsw button').forEach(function (x) { x.setAttribute('aria-pressed', x.dataset.reel === REEL ? 'true' : 'false'); });
+    var cur0 = VIDS[cur];
+    if (first || !cur0 || !(!REEL || cur0.region === 'both' || cur0.region === REEL)) { if (firstI >= 0) { cur = -1; load(firstI, false); } }
+  }
+  if (!EDIT && VIDS.some(function (v) { return v.region && v.region !== 'both'; })) {
+    var sh = document.querySelector('#videos .sec-h');
+    if (sh) {
+      var sw = document.createElement('p'); sw.className = 'reelsw';
+      sw.innerHTML = [['', REEL_L.all], ['west', REEL_L.west], ['asia', REEL_L.asia]].map(function (o) { return '<button type="button" data-reel="' + o[0] + '">' + esc(o[1]) + '</button>'; }).join('<span aria-hidden="true">·</span>');
+      sh.appendChild(sw);
+      sw.addEventListener('click', function (e) {
+        var bt = e.target.closest('[data-reel]'); if (!bt) return;
+        applyReel(bt.dataset.reel, false);
+        try { var u = new URL(location.href); if (bt.dataset.reel) u.searchParams.set('reel', bt.dataset.reel); else u.searchParams.delete('reel'); history.replaceState(null, '', u); } catch (_) {}
+      });
+    }
+  }
+  if (VIDS.length) applyReel(REEL, true);
 
   // 안에 보이는 글 · 사진 · 영상이 하나도 없는 구역과 줄(테두리 선이 있는 칸)은 선까지 통째로 숨긴다(2026-10-25 사용자:
   // 글을 다 지웠는데 선만 남아 지저분함). 공개 페이지와 편집 화면 모두. 편집 화면에선 글 · 숨김이 바뀔 때마다 다시 잰다
@@ -853,6 +896,6 @@ html:not(.ed-mode) :is([data-k="profile.facts"], [data-k="labels.notesHead"], [d
 })();
 </script>
 
-<!-- pf-publish:1793000968184 -->
+<!-- pf-publish:1793001166341 -->
 
 </html>
