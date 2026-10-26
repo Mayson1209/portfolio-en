@@ -696,7 +696,7 @@ html:not(.ed-mode) :is([data-k="profile.facts"], [data-k="labels.notesHead"], [d
     document.querySelectorAll('.npanel').forEach(function (p) { p.hidden = p.getAttribute('data-panel') !== b.getAttribute('data-tab'); });
   });
   // 편집 모드(edit-design.js)가 구간을 더하고 뺄 때 다시 그리려고 내놓음
-  window.PF = { VIDS: VIDS, renderInfo: renderInfo, cur: function () { return cur; } };
+  window.PF = { VIDS: VIDS, renderInfo: renderInfo, cur: function () { return cur; }, reload: function (i) { cur = -1; if (VIDS.length) load(Math.max(0, Math.min(VIDS.length - 1, i || 0)), false); } };
   // 구역 순서(site.json sectionOrder, 편집 화면 왼쪽 「페이지」 판에서 바꿈) — 구역 · 위 메뉴를 그 순서로
   (function () {
     var ORDER = ["videos","projects","work","programs","notes","contact"];
@@ -848,6 +848,6 @@ html:not(.ed-mode) :is([data-k="profile.facts"], [data-k="labels.notesHead"], [d
 })();
 </script>
 
-<!-- pf-publish:1792999537245 -->
+<!-- pf-publish:1793000158837 -->
 
 </html>
